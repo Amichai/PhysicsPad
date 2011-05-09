@@ -1,0 +1,12 @@
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll.config
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll.config
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.dll
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.Tests.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.dll
+C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit.Tests\obj\Debug\ICSharpCode.AvalonEdit.Tests.pdb

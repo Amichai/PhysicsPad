@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AvalonEdit.Sample.MyCompletionData" Collapsed="true">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAgAAIEAAAAAAAAAAAAABAAAAAACAAAAAA=</HashCode>
+      <FileName>MyCompletionData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.TextEditor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.TextEditorWeakEventManager" Collapsed="true">
+    <Position X="23.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.TextEditorAutomationPeer" Collapsed="true">
+    <Position X="19.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.TextEditorOptions" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.CompletionList" Collapsed="true">
+    <Position X="32" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.CompletionListBox" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.CompletionWindow" Collapsed="true">
+    <Position X="10.5" Y="14" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.CompletionWindowBase" Collapsed="true">
+    <Position X="11.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.InsightWindow" Collapsed="true">
+    <Position X="12.75" Y="14" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.OverloadInsightWindow" Collapsed="true">
+    <Position X="12.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.CodeCompletion.OverloadViewer" Collapsed="true">
+    <Position X="25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.ChangeTrackingCheckpoint" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.DocumentChangeEventArgs" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.DocumentLine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.WeakLineTracker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.AnchorSegment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextSourceView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.StringTextSource" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.RopeTextSource" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextUtilities" Collapsed="true">
+    <Position X="32" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.OffsetChangeMap" Collapsed="true">
+    <Position X="23.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextAnchor" Collapsed="true">
+    <Position X="23.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextDocument" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextDocumentWeakEventManager" Collapsed="true">
+    <Position X="32" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextSegment" Collapsed="true">
+    <Position X="9.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.TextSegmentCollection&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Document.UndoStack" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.AbstractMargin" Collapsed="true">
+    <Position X="6.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.Caret" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.CaretWeakEventManager" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.DottedLineMargin" Collapsed="true">
+    <Position X="28.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.DragDropException" Collapsed="true">
+    <Position X="30.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextSegmentReadOnlySectionProvider&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.LineNumberMargin" Collapsed="true">
+    <Position X="5.5" Y="14" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.Selection" Collapsed="true">
+    <Position X="13.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.RectangleSelection" Collapsed="true">
+    <Position X="14.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.SimpleSelection" Collapsed="true">
+    <Position X="12.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextArea" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextEventArgs" Collapsed="true">
+    <Position X="25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextAreaDefaultInputHandler" Collapsed="true">
+    <Position X="15.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextAreaStackedInputHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Editing.TextAreaInputHandler" Collapsed="true">
+    <Position X="15.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.AbstractFoldingStrategy" Collapsed="true">
+    <Position X="6.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.FoldingElementGenerator" Collapsed="true">
+    <Position X="8.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.FoldingManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.FoldingMargin" Collapsed="true">
+    <Position X="7.75" Y="14" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.FoldingSection" Collapsed="true">
+    <Position X="9.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.NewFolding" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Folding.XmlFoldingStrategy" Collapsed="true">
+    <Position X="6.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.DocumentHighlighter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightedInlineBuilder" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightedLine" Collapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightedSection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingBrush" Collapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingColor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingColorizer" Collapsed="true">
+    <Position X="0.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingDefinitionInvalidException" Collapsed="true">
+    <Position X="30.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingDefinitionTypeConverter" Collapsed="true">
+    <Position X="32" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingRule" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingRuleSet" Collapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HighlightingSpan" Collapsed="true">
+    <Position X="25" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HtmlClipboard" Collapsed="true">
+    <Position X="26.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.HtmlOptions" Collapsed="true">
+    <Position X="28.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.SaveXshdVisitor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdColor" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdElement" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdImport" Collapsed="true">
+    <Position X="10" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdKeywords" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdRule" Collapsed="true">
+    <Position X="1" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdRuleSet" Collapsed="true">
+    <Position X="3.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdSpan" Collapsed="true">
+    <Position X="5.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdSyntaxDefinition" Collapsed="true">
+    <Position X="32" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy" Collapsed="true">
+    <Position X="3.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Indentation.CSharp.TextDocumentAccessor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy" Collapsed="true">
+    <Position X="3.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.FormattedTextElement" Collapsed="true">
+    <Position X="5.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.FormattedTextRun" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.CollapsedLineSection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.BackgroundGeometryBuilder" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.InlineObjectElement" Collapsed="true">
+    <Position X="0.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.InlineObjectRun" Collapsed="true">
+    <Position X="32" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.ColorizingTransformer" Collapsed="true">
+    <Position X="0.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.DocumentColorizingTransformer" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.LinkElementGenerator" Collapsed="true">
+    <Position X="10.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.TextView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.TextViewWeakEventManager" Collapsed="true">
+    <Position X="19.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLine" Collapsed="true">
+    <Position X="23.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineElementTextRunProperties" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineConstructionStartEventArgs" Collapsed="true">
+    <Position X="25" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineElement" Collapsed="true">
+    <Position X="3" Y="9.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineElementGenerator" Collapsed="true">
+    <Position X="9.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineLinkText" Collapsed="true">
+    <Position X="3" Y="12.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLinesInvalidException" Collapsed="true">
+    <Position X="28.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Rendering.VisualLineText" Collapsed="true">
+    <Position X="3" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.InsertionContext" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.Snippet" Collapsed="true">
+    <Position X="5.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetBoundElement" Collapsed="true">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetCaretElement" Collapsed="true">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetContainerElement" Collapsed="true">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetElement" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetEventArgs" Collapsed="true">
+    <Position X="19.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetReplaceableTextElement" Collapsed="true">
+    <Position X="9.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetSelectionElement" Collapsed="true">
+    <Position X="7.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Snippets.SnippetTextElement" Collapsed="true">
+    <Position X="9.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.CharRope" Collapsed="true">
+    <Position X="28.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.CompressingTreeList&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.Deque&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.FileReader" Collapsed="true">
+    <Position X="32" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.ImmutableStack&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.NullSafeCollection&lt;T&gt;" Collapsed="true">
+    <Position X="21.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.PixelSnapHelpers" Collapsed="true">
+    <Position X="26.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.PropertyChangedWeakEventManager" Collapsed="true">
+    <Position X="13.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.Rope&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.RopeTextReader" Collapsed="true">
+    <Position X="30.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.Utils.WeakEventManagerBase&lt;TManager, TEventSource&gt;" Collapsed="true">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="13.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ICSharpCode.AvalonEdit.AvalonEditCommands" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Struct Name="ICSharpCode.AvalonEdit.TextViewPosition" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="ICSharpCode.AvalonEdit.Document.OffsetChangeMapEntry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="ICSharpCode.AvalonEdit.Document.TextLocation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdReference&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Interface Name="ICSharpCode.AvalonEdit.ITextEditorComponent" Collapsed="true">
+    <Position X="23.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.CodeCompletion.ICompletionData" Collapsed="true">
+    <Position X="19.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.CodeCompletion.IOverloadProvider" Collapsed="true">
+    <Position X="32" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Document.ILineTracker" Collapsed="true">
+    <Position X="30.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Document.ISegment" Collapsed="true">
+    <Position X="19.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Document.ITextSource" Collapsed="true">
+    <Position X="26.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Document.IUndoableOperation" Collapsed="true">
+    <Position X="30.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Editing.IReadOnlySectionProvider" Collapsed="true">
+    <Position X="18" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Editing.ITextAreaInputHandler" Collapsed="true">
+    <Position X="21.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Highlighting.IHighlighter" Collapsed="true">
+    <Position X="23.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Highlighting.IHighlightingDefinition" Collapsed="true">
+    <Position X="25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Highlighting.IHighlightingDefinitionReferenceResolver" Collapsed="true">
+    <Position X="26.75" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.IXshdVisitor" Collapsed="true">
+    <Position X="18" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Indentation.CSharp.IDocumentAccessor" Collapsed="true">
+    <Position X="21.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Indentation.IIndentationStrategy" Collapsed="true">
+    <Position X="28.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Rendering.IBackgroundRenderer" Collapsed="true">
+    <Position X="18" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Rendering.IVisualLineTransformer" Collapsed="true">
+    <Position X="32" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Rendering.ITextViewConnect" Collapsed="true">
+    <Position X="28.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Rendering.ITextRunConstructionContext" Collapsed="true">
+    <Position X="25" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Snippets.IActiveElement" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="ICSharpCode.AvalonEdit.Snippets.IReplaceableActiveElement" Collapsed="true">
+    <Position X="15.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Enum Name="ICSharpCode.AvalonEdit.Document.OffsetChangeMappingType" Collapsed="true">
+    <Position X="28.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Document.AnchorMovementType" Collapsed="true">
+    <Position X="18" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Document.CaretPositioningMode" Collapsed="true">
+    <Position X="19.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Document.CharacterClass" Collapsed="true">
+    <Position X="21.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdRegexType" Collapsed="true">
+    <Position X="32" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Rendering.KnownLayer" Collapsed="true">
+    <Position X="25" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Rendering.LayerInsertionPosition" Collapsed="true">
+    <Position X="26.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Rendering.VisualYPosition" Collapsed="true">
+    <Position X="30.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="ICSharpCode.AvalonEdit.Snippets.DeactivateReason" Collapsed="true">
+    <Position X="23.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

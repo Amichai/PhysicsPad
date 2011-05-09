@@ -1,0 +1,22 @@
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\AvalonEdit.Sample.exe
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\AvalonEdit.Sample.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\Window1.baml
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\Window1.g.cs
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\App.g.cs
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample_MarkupCompile.cache
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.g.resources
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.exe
+C:\Users\Amichai\Documents\Third Party Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\bin\Debug\AvalonEdit.Sample.exe.config
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\AvalonEdit.Sample.exe.config
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.exe
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\AvalonEdit.Sample.exe
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\AvalonEdit.Sample.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\Window1.baml
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\Window1.g.cs
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\App.g.cs
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample_MarkupCompile.cache
+C:\Users\Amichai\Documents\My Source\Avalon\AvalonEdit.Sample\obj\x86\Debug\AvalonEdit.Sample.g.resources

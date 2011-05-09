@@ -1,0 +1,10 @@
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\ExposedText.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\ExposedText.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\obj\Debug\ExposedText.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\obj\Debug\ExposedText.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\ICSharpCode.AvalonEdit.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\ExposedText\bin\Debug\ICSharpCode.AvalonEdit.xml

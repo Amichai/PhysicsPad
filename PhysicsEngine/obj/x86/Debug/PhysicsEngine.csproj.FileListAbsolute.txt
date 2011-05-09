@@ -1,0 +1,18 @@
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\bin\Debug\PhysicsEngine.exe
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\bin\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\PhysicsEngine.exe
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\Best.Editor.TextEditor.resources
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Amichai\Documents\Visual Studio 2010\Projects\PhysicsEngine\PhysicsEngine\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Amichai\Documents\Third Party Source\Avalon\PhysicsEngine\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\Third Party Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\PhysicsEngine\bin\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\Third Party Source\Avalon\PhysicsEngine\bin\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\Third Party Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.pdb
