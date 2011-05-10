@@ -5,6 +5,7 @@ using System.Text;
 using PhysicsEngine.Numbers;
 using System.Diagnostics;
 using MathNet.Numerics;
+using System.Numerics;
 
 namespace PhysicsEngine.Compiler {
 	public abstract class ParseTree {
@@ -38,7 +39,7 @@ namespace PhysicsEngine.Compiler {
 	}
 
 	public class TreeNode : ParseTree{
-		internal void AppendNumber(double tokenVal) {
+		internal void AppendNumber(Numerics.BigRational tokenVal) {
 			TreeNode child = new TreeNode();
 			child.type = nodeType.number;
 			child.val = new Value(tokenVal, Restrictions.none);
@@ -128,14 +129,16 @@ namespace PhysicsEngine.Compiler {
 		//TODO: when multiplying two numbers, don't recalculate prime factors, but combine the two lists of factors
 
 		//TODO: This should be from the Value class not doubles
-		double postFixedOperatorEvaluator(List<double> values, string tokenString) {
+		Numerics.BigRational postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
-			double returnVal = values.Last();
-			if (returnVal != Math.Floor(returnVal))
-				ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
+			Numerics.BigRational returnVal = values.Last();
 			if (tokenString == "!") {
-				returnVal = Combinatorics.Permutations((int)returnVal);
+				if (returnVal.Denominator != 1)
+					ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
+				else {
+					returnVal = new Numerics.BigRational(((BigInteger)Combinatorics.Permutations((int)returnVal.Numerator)), 1);
+				}
 				if (values.Count() > 1)
 					throw new Exception("suffix notation can only have one child");
 			}
@@ -157,7 +160,7 @@ namespace PhysicsEngine.Compiler {
 					returnVal %= values[i];
 					break;
 				case "^":
-					returnVal = Math.Pow(returnVal, values[i]);
+					returnVal = Numerics.BigRational.Pow(returnVal, (BigInteger)values[i]);
 					if (values.Count() > 2)
 						throw new Exception("Can't have more than two parameters for the power method.");
 					break;
@@ -173,7 +176,7 @@ namespace PhysicsEngine.Compiler {
 			if (p == "ans") {
 				TreeNode child = new TreeNode();
 				child.type = nodeType.number;
-				double tokenVal = OutputLog.returnValues.Last().deciValue;
+				Numerics.BigRational tokenVal = OutputLog.returnValues.Last().deciValue;
 				child.val = new Value(tokenVal, Restrictions.none);
 				child.name = tokenVal.ToString();
 				child.numericalEvaluation = true;

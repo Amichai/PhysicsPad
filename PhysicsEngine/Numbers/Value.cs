@@ -11,20 +11,20 @@ namespace PhysicsEngine.Numbers {
 	public enum NumberType { integer, deci, fractional, imaginary, exponent };
 	public class Value {
 		#region constructors
-		public Value(double doubleVal, Restrictions restrictions) {
+		public Value(Numerics.BigRational doubleVal, Restrictions restrictions) {
 				InitDouble(doubleVal, restrictions);
 		}
-		public Value(double doubleVal, Factors factors, Restrictions restrictions) {
+		public Value(Numerics.BigRational doubleVal, Factors factors, Restrictions restrictions) {
 			InitDouble(doubleVal, restrictions);
 		}
-		public Value(double realPart, double imaginaryPart, NumberType type) {
+		public Value(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart, NumberType type) {
 			switch (type) {
 				case NumberType.imaginary:
 					InitComplexNum(realPart, imaginaryPart);
 					break;
 			}
 		}
-		public Value(double baseVal, double exponent, NumberType type, Restrictions restrictions) {
+		public Value(Numerics.BigRational baseVal, Numerics.BigRational exponent, NumberType type, Restrictions restrictions) {
 			switch (type) {
 				case NumberType.exponent:
 					InitExp(baseVal, exponent, restrictions);
@@ -43,14 +43,14 @@ namespace PhysicsEngine.Numbers {
 		private NumberType primaryNumType { get; set; }
 
 		/// <summary>Decimal value</summary>
-		public void InitDouble(double val, Restrictions restrictions) {
+		public void InitDouble(Numerics.BigRational val, Restrictions restrictions) {
 			this.deciValue = val;
-			if (val == Math.Floor(val)) {
+			if (val == (BigInteger)(val)) {
 				//this is done to avoid the accumulation of miniscule errors:
-				deciValue = Math.Floor(val);
+				deciValue = (BigInteger)val;
 				primaryNumType = NumberType.integer;
 				if (restrictions != Restrictions.dontFactorMe && restrictions != Restrictions.dontFactorDontSetFraction) {
-					factors = new Factors((int)deciValue);
+					factors = new Factors((BigInteger)deciValue);
 				}
 			}else if (restrictions != Restrictions.dontSetToFraction && restrictions != Restrictions.dontFactorDontSetFraction) {
 				asAFraction = decimalToFraction(deciValue);
@@ -60,7 +60,7 @@ namespace PhysicsEngine.Numbers {
 		public Factors factors;
 
 		/// <summary>Complex Numbers</summary>
-		public void InitComplexNum(double realPart, double imaginaryPart) {
+		public void InitComplexNum(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart) {
 			this.realPart = new Value(realPart, Restrictions.none);
 			this.imaginaryPart = new Value(imaginaryPart, Restrictions.none);
 			this.deciValue = realPart;
@@ -69,22 +69,22 @@ namespace PhysicsEngine.Numbers {
 		}
 
 		/// <summary>Fraction</summary>
-		public void InitFraction(int numerator, int denominator) {
+		public void InitFraction(BigInteger numerator, BigInteger denominator) {
 			this.numerator = new Value(numerator, Restrictions.dontSetToFraction);
 			this.denominator = new Value(denominator, Restrictions.dontSetToFraction);
-			this.deciValue = ((double)numerator / denominator);
+			this.deciValue = ((Numerics.BigRational)numerator / denominator);
 			this.primaryNumType = NumberType.fractional;
 		}
 
 		/// <summary>Exponent</summary>
-		public void InitExp(double expBase, double expPower, Restrictions restrictionsToPass) {
+		public void InitExp(Numerics.BigRational expBase, Numerics.BigRational expPower, Restrictions restrictionsToPass) {
 			this.ExpBase = new Value(expBase, restrictionsToPass);
 			this.ExpPower = new Value(expPower, restrictionsToPass);
-			this.deciValue = (Math.Pow(expBase, expPower));
+			this.deciValue = (Numerics.BigRational.Pow(expBase, (BigInteger)expPower));
 			primaryNumType = NumberType.exponent;
 		}
 		
-		public double deciValue = double.MinValue;
+		public Numerics.BigRational deciValue = double.MinValue;
 		
 		public Value asAFraction { get; set; }
 		public Value realPart { get; set; }
@@ -123,32 +123,32 @@ namespace PhysicsEngine.Numbers {
 		}
 
 		private enum Sign { positive, negative };
-		private Value decimalToFraction(double Decimal) {
-			int fractionNumerator = int.MaxValue;
-			int fractionDenominator = 1;
-			double accuracyFactor = .0000001;
+		private Value decimalToFraction(Numerics.BigRational Decimal) {
+			BigInteger fractionNumerator = int.MaxValue;
+			BigInteger fractionDenominator = 1;
+			Numerics.BigRational accuracyFactor = .0000001;
 			int decimalSign;
-			double Z;
-			int previousDenominator;
-			int scratchValue;
+			Numerics.BigRational Z;
+			BigInteger previousDenominator;
+			BigInteger scratchValue;
 
 			if (Decimal < 0) {
 				decimalSign = -1;
 			} else decimalSign = 1;
-			Decimal = Math.Abs(Decimal);
-			if (Decimal == Math.Floor(Decimal)) {
+			Decimal = Numerics.BigRational.Abs(Decimal);
+			if (Decimal == (BigInteger)Decimal) {
 				fractionNumerator = (int)Decimal * decimalSign;
 				fractionDenominator = 1;
 				return new Value(fractionDenominator, fractionNumerator, NumberType.fractional);
 			}
 			Z = Decimal;
 			previousDenominator = 0;
-			while (!(Z == Math.Floor(Z)) && (Math.Abs((Decimal - ((double)fractionNumerator / fractionDenominator))) > accuracyFactor )) {
-				Z = 1/(Z - (int)Z);
+			while (!(Z == (BigInteger)Z) && (Numerics.BigRational.Abs((Decimal - ((Numerics.BigRational)fractionNumerator / fractionDenominator))) > accuracyFactor)) {
+				Z = 1/(Z - (BigInteger)Z);
 				scratchValue = fractionDenominator;
-				fractionDenominator = fractionDenominator*(int)Z + previousDenominator;
+				fractionDenominator = fractionDenominator*(BigInteger)Z + previousDenominator;
 				previousDenominator = scratchValue;
-				fractionNumerator= (int)Math.Floor(Decimal*fractionDenominator + .5);
+				fractionNumerator = (BigInteger)(Decimal*fractionDenominator + .5);
 			} 
 			fractionNumerator  = decimalSign * fractionNumerator;
 			return new Value(fractionNumerator, fractionDenominator, NumberType.fractional);

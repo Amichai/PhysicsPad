@@ -20,3 +20,4 @@ C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Nume
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\zlib.net.dll
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.pdb
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.xml
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\BigRationalLibrary.dll
