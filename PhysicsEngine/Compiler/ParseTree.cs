@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PhysicsEngine.Numbers;
 using System.Diagnostics;
+using MathNet.Numerics;
 
 namespace PhysicsEngine.Compiler {
 	public abstract class ParseTree {
@@ -52,10 +53,15 @@ namespace PhysicsEngine.Compiler {
 		/// Take each token string from the list of postfixedtokens and build a parse tree
 		/// with each node evaluated when possible. 
 		/// </summary>
-		internal void AppendOperator(string tokenString) {
+		internal void AppendOperator(string tokenString, TokenType type) {
 			//Will always take an operation and append two numbers as children
 			//This is necessitated by the postfixed token construction
-			const int numberOfChildLeafs = 2; //For primitive operations, this number is 2. For functions its variable
+			int numberOfChildLeafs = 0;
+			if(type == TokenType.arithmeticOp)
+				numberOfChildLeafs = 2; //For primitive operations, this number is 2. For functions its variable
+			if(type == TokenType.suffixOp)
+				numberOfChildLeafs = 1;
+
 			TreeNode child = new TreeNode();
 			child.type = nodeType.operation;
 			child.name = tokenString;
@@ -126,6 +132,13 @@ namespace PhysicsEngine.Compiler {
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			double returnVal = values.Last();
+			if (returnVal != Math.Floor(returnVal))
+				ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
+			if (tokenString == "!") {
+				returnVal = Combinatorics.Permutations((int)returnVal);
+				if (values.Count() > 1)
+					throw new Exception("suffix notation can only have one child");
+			}
 			for (int i = values.Count() - 2; i >= 0; i--) 
 				switch (tokenString) {
 				case "+":

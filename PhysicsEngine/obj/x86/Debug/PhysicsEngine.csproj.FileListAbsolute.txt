@@ -17,7 +17,6 @@ C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\ResolveA
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.dll
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\obj\x86\Debug\PhysicsEngine.pdb
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.dll
-C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.FSharp.dll
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\zlib.net.dll
 C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.pdb
-C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.FSharp.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\PhysicsEngine\bin\Debug\MathNet.Numerics.xml

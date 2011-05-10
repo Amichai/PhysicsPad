@@ -37,6 +37,9 @@ namespace PhysicsEngine {
 				if (token.TokenType == TokenType.arithmeticOp) {
 					handleOperator(token);
 				}
+				if (token.TokenType == TokenType.suffixOp) {
+					tokens.Add(token);
+				}
 				if (token.TokenType == TokenType.openBrace) {
 					operatorStack.Push(token);
 				}
@@ -104,7 +107,10 @@ namespace PhysicsEngine {
 						parseTree.AppendNumber(token.TokenNumValue);
 						break;
 					case TokenType.arithmeticOp:
-						parseTree.AppendOperator(token.TokenString);
+						parseTree.AppendOperator(token.TokenString, token.TokenType);
+						break;
+					case TokenType.suffixOp:
+						parseTree.AppendOperator(token.TokenString, token.TokenType);
 						break;
 					case TokenType.variable:
 						if (!parseTree.AppendVariable(token.TokenString)) {

@@ -21,7 +21,7 @@ namespace PhysicsEngine {
 					TokenType = TokenType.function;
 				} else {
 					TokenType = TokenType.variable;
-					//Look up variable value in a dictionary
+					//TODO: Look up variable value in a dictionary
 				}
 			}
 		}

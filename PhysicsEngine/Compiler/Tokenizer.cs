@@ -5,11 +5,12 @@ using System.Text;
 using System.Diagnostics;
 
 namespace PhysicsEngine {
-	public enum TokenType { number, function, charString, arithmeticOp, syntaxChar, empty, closedBrace, openBrace, equalSign, variable }
-	public enum CharType { number, letter, arithmeticOp, syntaxChar, period, plusOrMinusSign, brace, whitespace }
+	public enum TokenType { number, function, charString, arithmeticOp, syntaxChar, empty, closedBrace, openBrace, equalSign, variable, suffixOp }
+	public enum CharType { number, letter, infixArithmeticOp, syntaxChar, period, plusOrMinusSign, brace, whitespace, suffixOp }
 	class Tokenizer {
 		public readonly static HashSet<char> syntaxChars = new HashSet<char>() { ',', '{', '}' };
-		public readonly static HashSet<char> arithmeticOperations = new HashSet<char>() { '/', '*', '^', '%', '=' };
+		public readonly static HashSet<char> infixArithmeticOperations = new HashSet<char>() { '/', '*', '^', '%' };
+		public readonly static HashSet<char> suffixOperation = new HashSet<char>() { '!' };
 		
 		string compilerInput = string.Empty;
 
@@ -35,8 +36,8 @@ namespace PhysicsEngine {
 					currentCharTokenType = CharType.letter;
 				if (syntaxChars.Contains(c))
 					currentCharTokenType = CharType.syntaxChar;
-				if (arithmeticOperations.Contains(c)) {
-					currentCharTokenType = CharType.arithmeticOp;
+				if (infixArithmeticOperations.Contains(c)) {
+					currentCharTokenType = CharType.infixArithmeticOp;
 				}
 				if (c == '(' || c == ')')
 					currentCharTokenType = CharType.brace;
@@ -44,6 +45,8 @@ namespace PhysicsEngine {
 					currentCharTokenType = CharType.whitespace;
 				if (c == '+' || c == '-')
 					currentCharTokenType = CharType.plusOrMinusSign;
+				if (suffixOperation.Contains(c))
+					currentCharTokenType = CharType.suffixOp;
 			}
 		}
 
@@ -53,12 +56,8 @@ namespace PhysicsEngine {
 			private HashSet<CharType> charsThatAppendToCurrentString = new HashSet<CharType>();
 
 			public Token Flush() {
-				double tempOutVar;
 				Token tokenToReturn = null;
-				if (double.TryParse(tokenString, out tempOutVar))
-					tokenToReturn = new Token(tokenString, TokenType.number);
-				else
-					tokenToReturn = new Token(tokenString, TokenType.variable);
+				tokenToReturn = new Token(tokenString, currentStringTokenType);
 				return tokenToReturn;
 			}
 
@@ -66,7 +65,7 @@ namespace PhysicsEngine {
 				Token tokenToReturn  = null;
 				//check if the char is legal in this context
 				if (syntaxIllegalCharTypes.Contains(c.currentCharTokenType)) {
-					//throw new Exception("Illegal char placement");
+					ErrorLog.Add(new ErrorMessage("Syntax illegal char cannot be added to token"));
 					return null;
 				}
 				//The char is legal. Check we if we should publish the current string
@@ -80,16 +79,17 @@ namespace PhysicsEngine {
 				//Set the local string type and other currenttoken state values
 				//Set publication types and char legal types
 				switch (c.currentCharTokenType) {
-					case CharType.arithmeticOp:
-						//Set local string type
-						if (c.val == '=')
-							currentStringTokenType = TokenType.equalSign;
-						else
-							currentStringTokenType = TokenType.arithmeticOp;
+					case CharType.infixArithmeticOp:
+						currentStringTokenType = TokenType.arithmeticOp;
 						//Set the value of the publication type, etc.
 						//Publish on every char type
 						charsThatAppendToCurrentString = new HashSet<CharType>() {};
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.arithmeticOp, CharType.syntaxChar };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar, CharType.suffixOp };
+						break;
+					case CharType.suffixOp:
+						currentStringTokenType = TokenType.suffixOp;
+						charsThatAppendToCurrentString = new HashSet<CharType>() {};
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.number };
 						break;
 					case CharType.brace:
 						if(c.val == ')')
@@ -119,12 +119,12 @@ namespace PhysicsEngine {
 					case CharType.plusOrMinusSign:
 						currentStringTokenType = TokenType.arithmeticOp;
 						charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.number };
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.arithmeticOp, CharType.syntaxChar };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar, CharType.suffixOp };
 						break;
 					case CharType.syntaxChar:
 						currentStringTokenType = TokenType.syntaxChar;
 						charsThatAppendToCurrentString = new HashSet<CharType>() { };
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.arithmeticOp, CharType.syntaxChar };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar };
 						break;
 					case CharType.whitespace:
 						tokenString = string.Empty;
