@@ -12,6 +12,7 @@ namespace PhysicsEngine.Expression {
 	}
 
 	class Manipulations {
+
 		//Taylor expansion
 		//Derivative of a function 
 		//Limit

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using MathNet.Numerics;
+using System.Numerics;
 
 namespace PhysicsEngine.Numbers {
 	public enum Restrictions { dontFactorMe, dontSetToFraction, dontFactorDontSetFraction, none };
