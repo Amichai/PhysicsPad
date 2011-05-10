@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using MathNet.Numerics;
 
 namespace PhysicsEngine.Numbers {
 	public enum Restrictions { dontFactorMe, dontSetToFraction, dontFactorDontSetFraction, none };
 	public enum NumberType { integer, deci, fractional, imaginary, exponent };
 	public class Value {
-		#region constructorns
+		#region constructors
 		public Value(double doubleVal, Restrictions restrictions) {
 				InitDouble(doubleVal, restrictions);
 		}

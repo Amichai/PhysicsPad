@@ -1,0 +1,13 @@
+output
+*.Cache
+*.cache
+*.ncb
+TestResult.xml
+coverage.*
+_ReSharper*
+*.marcus
+*.bak
+bin
+*.vsdoc
+*.XML
+out
