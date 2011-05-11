@@ -18,18 +18,18 @@ namespace PhysicsEngine {
 				if (tokenToAdd.TokenType == TokenType.number
 					&& (tokens.Last().TokenType == TokenType.number || tokens.Last().TokenType == TokenType.closedBrace)
 					&& (tokenToAdd.TokenString[0] == '-' || tokenToAdd.TokenString[0] == '+')) {
-					tokens.Add(new Token("+", TokenType.arithmeticOp));
+					tokens.Add(new Token("+", TokenType.infixOperator));
 				}
 				//Infer a multiplication sign between two sets of parenthesis
 				if (tokenToAdd.TokenType == TokenType.openBrace && tokens.Last().TokenType == TokenType.closedBrace) {
-					tokens.Add(new Token("*", TokenType.arithmeticOp));
+					tokens.Add(new Token("*", TokenType.infixOperator));
 				}
 				//Infer a multiplication sign between parenthesis and a number (that doesn't start with a minus sign)
 				if (tokenToAdd.TokenType == TokenType.openBrace && tokens.Last().TokenType == TokenType.number) {
-					tokens.Add(new Token("*", TokenType.arithmeticOp));
+					tokens.Add(new Token("*", TokenType.infixOperator));
 				}
 				if (tokenToAdd.TokenType == TokenType.number && tokens.Last().TokenType == TokenType.closedBrace && tokenToAdd.TokenString[0] != '-') {
-					tokens.Add(new Token("*", TokenType.arithmeticOp));
+					tokens.Add(new Token("*", TokenType.infixOperator));
 				}
 			}
 		}

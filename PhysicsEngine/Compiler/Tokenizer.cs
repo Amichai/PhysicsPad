@@ -5,10 +5,10 @@ using System.Text;
 using System.Diagnostics;
 
 namespace PhysicsEngine {
-	public enum TokenType { number, function, charString, arithmeticOp, syntaxChar, empty, closedBrace, openBrace, equalSign, variable, suffixOp }
-	public enum CharType { number, letter, infixArithmeticOp, syntaxChar, period, plusOrMinusSign, brace, whitespace, suffixOp }
+	public enum TokenType { number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator }
+	public enum CharType { number, letter, infixArithmeticOp, comma, period, plusOrMinusSign, brace, whitespace, suffixOp }
 	class Tokenizer {
-		public readonly static HashSet<char> syntaxChars = new HashSet<char>() { ',', '{', '}' };
+		public readonly static HashSet<char> argumentSeperator = new HashSet<char>() { ',' };
 		public readonly static HashSet<char> infixArithmeticOperations = new HashSet<char>() { '/', '*', '^', '%' };
 		public readonly static HashSet<char> suffixOperation = new HashSet<char>() { '!' };
 		
@@ -34,8 +34,8 @@ namespace PhysicsEngine {
 				}
 				if (char.IsLetter(c) || c == '_')
 					currentCharTokenType = CharType.letter;
-				if (syntaxChars.Contains(c))
-					currentCharTokenType = CharType.syntaxChar;
+				if (argumentSeperator.Contains(c))
+					currentCharTokenType = CharType.comma;
 				if (infixArithmeticOperations.Contains(c)) {
 					currentCharTokenType = CharType.infixArithmeticOp;
 				}
@@ -80,14 +80,14 @@ namespace PhysicsEngine {
 				//Set publication types and char legal types
 				switch (c.currentCharTokenType) {
 					case CharType.infixArithmeticOp:
-						currentStringTokenType = TokenType.arithmeticOp;
+						currentStringTokenType = TokenType.infixOperator;
 						//Set the value of the publication type, etc.
 						//Publish on every char type
 						charsThatAppendToCurrentString = new HashSet<CharType>() {};
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar, CharType.suffixOp };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.comma, CharType.suffixOp };
 						break;
 					case CharType.suffixOp:
-						currentStringTokenType = TokenType.suffixOp;
+						currentStringTokenType = TokenType.suffixOperator;
 						charsThatAppendToCurrentString = new HashSet<CharType>() {};
 						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.number };
 						break;
@@ -117,14 +117,14 @@ namespace PhysicsEngine {
 						}
 						break;
 					case CharType.plusOrMinusSign:
-						currentStringTokenType = TokenType.arithmeticOp;
+						currentStringTokenType = TokenType.infixOperator;
 						charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.number };
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar, CharType.suffixOp };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.comma, CharType.suffixOp };
 						break;
-					case CharType.syntaxChar:
-						currentStringTokenType = TokenType.syntaxChar;
+					case CharType.comma:
+						currentStringTokenType = TokenType.argSeperator;
 						charsThatAppendToCurrentString = new HashSet<CharType>() { };
-						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.syntaxChar };
+						syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.infixArithmeticOp, CharType.comma };
 						break;
 					case CharType.whitespace:
 						tokenString = string.Empty;
@@ -142,7 +142,7 @@ namespace PhysicsEngine {
 				char c = compilerInput[i];
 				tokenToAdd = tokenString.AddChar(new currentChar(c));
 				if (tokenToAdd != null) {
-					if (tokenToAdd.TokenType == TokenType.arithmeticOp && i == 1)
+					if (tokenToAdd.TokenType == TokenType.infixOperator && i == 1)
 						allTokens.Add(new Token("ans", TokenType.variable));
 					allTokens.Add(tokenToAdd);
 				}

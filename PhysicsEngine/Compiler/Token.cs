@@ -22,10 +22,10 @@ namespace PhysicsEngine {
 					Decimal tempValForParse = Decimal.Parse(TokenString);
 					TokenNumValue = new Numerics.BigRational(tempValForParse);
 					break;
-				case TokenType.arithmeticOp:
+				case TokenType.infixOperator:
 					numberOfChildren = 2;
 					break;
-				case TokenType.suffixOp:
+				case TokenType.suffixOperator:
 					numberOfChildren = 1;
 					break;
 				case TokenType.charString:

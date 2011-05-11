@@ -10,7 +10,7 @@ namespace PhysicsEngine {
 		private void handleOperator(Token token) {
 			//If the current op has higher precedence, add to the stack
 			//true if the last operator on the stack has precedence over the current operator
-			while (operatorStack.Count() > 0 && operatorStack.First().TokenType == TokenType.arithmeticOp
+			while (operatorStack.Count() > 0 && operatorStack.First().TokenType == TokenType.infixOperator
 				&& precedenceTest(operatorStack.First().TokenString, token.TokenString)) {
 				tokens.Add(operatorStack.Pop());
 			}
@@ -28,7 +28,8 @@ namespace PhysicsEngine {
 					operatorStack.Push(token);
 					numberOfFunctionParameters.Add(0);
 				}
-				if (token.TokenType == TokenType.syntaxChar) { //","
+				//TODO: Make a new token type called argument seperator
+				if (token.TokenType == TokenType.argSeperator) { //","
 					if (operatorStack.Count() == 0) {
 						ErrorLog.Add(new ErrorMessage(token.TokenString + " operator syntax error."));
 					} else {
@@ -39,10 +40,10 @@ namespace PhysicsEngine {
 						}
 					}
 				}
-				if (token.TokenType == TokenType.arithmeticOp) {
+				if (token.TokenType == TokenType.infixOperator) {
 					handleOperator(token);
 				}
-				if (token.TokenType == TokenType.suffixOp) {
+				if (token.TokenType == TokenType.suffixOperator) {
 					tokens.Add(token);
 				}
 				if (token.TokenType == TokenType.openBrace) {
@@ -124,10 +125,10 @@ namespace PhysicsEngine {
 					case TokenType.number:
 						parseTree.AppendNumber(token.TokenNumValue);
 						break;
-					case TokenType.arithmeticOp:
+					case TokenType.infixOperator:
 						parseTree.AppendOperator(token);
 						break;
-					case TokenType.suffixOp:
+					case TokenType.suffixOperator:
 						parseTree.AppendOperator(token);
 						break;
 					case TokenType.variable:
