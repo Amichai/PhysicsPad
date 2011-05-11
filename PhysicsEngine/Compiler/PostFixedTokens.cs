@@ -17,6 +17,7 @@ namespace PhysicsEngine {
 			operatorStack.Push(token);
 		}
 
+		List<int> numberOfFunctionParameters = new List<int>();
 		Stack<Token> operatorStack = new Stack<Token>();
 		public PostfixedTokens(List<Token> inputTokens) {
 			foreach (Token token in inputTokens) {
@@ -25,13 +26,17 @@ namespace PhysicsEngine {
 				}
 				if (token.TokenType == TokenType.function) {
 					operatorStack.Push(token);
+					numberOfFunctionParameters.Add(0);
 				}
-				if (token.TokenType == TokenType.syntaxChar) {
+				if (token.TokenType == TokenType.syntaxChar) { //","
 					if (operatorStack.Count() == 0) {
 						ErrorLog.Add(new ErrorMessage(token.TokenString + " operator syntax error."));
 					} else {
-						while (operatorStack.First().TokenType != TokenType.openBrace)
+						if(numberOfFunctionParameters.Count > 0)
+							numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
+						while (operatorStack.First().TokenType != TokenType.openBrace) {
 							tokens.Add(operatorStack.Pop());
+						}
 					}
 				}
 				if (token.TokenType == TokenType.arithmeticOp) {
@@ -44,15 +49,28 @@ namespace PhysicsEngine {
 					operatorStack.Push(token);
 				}
 				if (token.TokenType == TokenType.closedBrace) {
+					Debug.Print(operatorStack.First().TokenType.ToString());
+					if(numberOfFunctionParameters.Count() > 0)
+						numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
 					while (operatorStack.First().TokenType != TokenType.openBrace) {
+						if (operatorStack.Count() == 0) {
+							ErrorLog.Add(new ErrorMessage("mismatched parenthesis error"));
+						}
 						tokens.Add(operatorStack.Pop());
-						//If no parenthesis found, mismatched parenthesis exception
 					}
-					operatorStack.Pop();
+					operatorStack.Pop(); //Pop the left parenthesis off the stack
+					if (operatorStack.Count > 0 && operatorStack.First().TokenType == TokenType.function) {
+						Token tokenToAdd = operatorStack.Pop();
+						tokenToAdd.numberOfChildren = numberOfFunctionParameters.Last();
+						numberOfFunctionParameters.RemoveAt(numberOfFunctionParameters.Count() - 1);
+						tokens.Add(tokenToAdd);
+					}
 				}
 			}
-			while (operatorStack.Count() > 0)
+			while (operatorStack.Count() > 0) {
 				tokens.Add(operatorStack.Pop());
+			}
+			//TODO: Handle mismatched bracket exception
 		}
 
 		private int getOperatorValue(string op) {
@@ -107,22 +125,25 @@ namespace PhysicsEngine {
 						parseTree.AppendNumber(token.TokenNumValue);
 						break;
 					case TokenType.arithmeticOp:
-						parseTree.AppendOperator(token.TokenString, token.TokenType);
+						parseTree.AppendOperator(token);
 						break;
 					case TokenType.suffixOp:
-						parseTree.AppendOperator(token.TokenString, token.TokenType);
+						parseTree.AppendOperator(token);
 						break;
 					case TokenType.variable:
 						if (!parseTree.AppendVariable(token.TokenString)) {
 							return null;
 						}
 						break;
+					case TokenType.function:
+						parseTree.AppendOperator(token);
+						break;
 					default:
 						throw new Exception("This token type cannot be appended to the parse tree");
 				}
 			}
 			//The root node is always redundant by construction
-			return parseTree.children.First();
+			return parseTree.children.First();						
 		}
 	}
 }

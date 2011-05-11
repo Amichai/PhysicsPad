@@ -13,7 +13,6 @@ namespace PhysicsEngine.Compiler {
 		public bool numericalEvaluation;
 		public List<TreeNode> children = new List<TreeNode>();
 		public string name = string.Empty;
-		//public double val = int.MinValue;
 		public Value val;
 		public nodeType type;
 		internal static string output = "\n";
@@ -54,15 +53,9 @@ namespace PhysicsEngine.Compiler {
 		/// Take each token string from the list of postfixedtokens and build a parse tree
 		/// with each node evaluated when possible. 
 		/// </summary>
-		internal void AppendOperator(string tokenString, TokenType type) {
-			//Will always take an operation and append two numbers as children
-			//This is necessitated by the postfixed token construction
-			int numberOfChildLeafs = 0;
-			if(type == TokenType.arithmeticOp)
-				numberOfChildLeafs = 2; //For primitive operations, this number is 2. For functions its variable
-			if(type == TokenType.suffixOp)
-				numberOfChildLeafs = 1;
-
+		internal void AppendOperator(Token token) {
+			string tokenString = token.TokenString;
+			int numberOfChildLeafs = token.numberOfChildren;
 			TreeNode child = new TreeNode();
 			child.type = nodeType.operation;
 			child.name = tokenString;
@@ -121,7 +114,7 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		Value postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {
+		Value postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {			
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			Factors factors;
@@ -164,6 +157,9 @@ namespace PhysicsEngine.Compiler {
 					if (values.Count() > 2)
 						throw new Exception("Can't have more than two parameters for the power method.");
 					break;
+				case "Sum":
+					returnVal += values[i];
+					break;
 				default:
 					throw new Exception("unknown operator");
 			}
@@ -190,13 +186,10 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 	}
-		
 	//TODO: ParseTreeManipulationMethods
 	//Flatten out teired addition -
 	//Find common factors over an addition problem
 	//Distribute multiplication over addition
 	//Addition and multiplication can be rearranged (commutative)
 	//Build fractions instead of evaluation
-	
-
 }
