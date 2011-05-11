@@ -16,6 +16,7 @@ namespace PhysicsEngine.Numbers {
 		}
 		public Value(Numerics.BigRational doubleVal, Factors factors, Restrictions restrictions) {
 			InitDouble(doubleVal, restrictions);
+			this.factors = factors;
 		}
 		public Value(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart, NumberType type) {
 			switch (type) {
@@ -50,7 +51,7 @@ namespace PhysicsEngine.Numbers {
 				deciValue = (BigInteger)val;
 				primaryNumType = NumberType.integer;
 				if (restrictions != Restrictions.dontFactorMe && restrictions != Restrictions.dontFactorDontSetFraction) {
-					factors = new Factors((BigInteger)deciValue);
+					factors = new Factors((new List<BigInteger>(){(BigInteger)deciValue}));
 				}
 			}else if (restrictions != Restrictions.dontSetToFraction && restrictions != Restrictions.dontFactorDontSetFraction) {
 				asAFraction = decimalToFraction(deciValue);

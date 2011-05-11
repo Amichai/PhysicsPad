@@ -76,11 +76,13 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
+				/*
 				child.val = new Value(
 							postFixedOperatorEvaluator(childLeafNodes.Select(i => i.val.deciValue).ToList(),
 																tokenString),
 							new Factors(childLeafNodes.Select(i => i.val.factors).ToList()),
-							Restrictions.none);
+							Restrictions.none); */
+				child.val = postFixedOperatorEvaluator(childLeafNodes.Select(i => i.val.deciValue).ToList(), tokenString);
 			}
 			flattenTieredAddOrMult(child);
 			children.Insert(0, child);
@@ -125,19 +127,22 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		//TODO: Division
-		//TODO: when multiplying two numbers, don't recalculate prime factors, but combine the two lists of factors
-
-		//TODO: This should be from the Value class not doubles
-		Numerics.BigRational postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {
+		Value postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
+			Factors factors;
 			Numerics.BigRational returnVal = values.Last();
+			List<BigInteger> listOfFactors = new List<BigInteger>((int)returnVal);
 			if (tokenString == "!") {
 				if (returnVal.Denominator != 1)
 					ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
 				else {
+					for (int i = 2; i < returnVal + 1; i++) {
+						listOfFactors.Add(i);
+					}
 					returnVal = new Numerics.BigRational(((BigInteger)Combinatorics.Permutations((int)returnVal.Numerator)), 1);
+					factors = new Factors(listOfFactors);
+					return new Value(returnVal, factors, Restrictions.dontFactorMe);
 				}
 				if (values.Count() > 1)
 					throw new Exception("suffix notation can only have one child");
@@ -169,7 +174,7 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (returnVal == int.MinValue)
 				throw new Exception("No evaluation happened");
-			return returnVal;
+			return new Value(returnVal, Restrictions.none);
 		}
 
 		internal bool AppendVariable(string p) {
