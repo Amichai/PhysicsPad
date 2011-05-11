@@ -76,12 +76,6 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
-				/*
-				child.val = new Value(
-							postFixedOperatorEvaluator(childLeafNodes.Select(i => i.val.deciValue).ToList(),
-																tokenString),
-							new Factors(childLeafNodes.Select(i => i.val.factors).ToList()),
-							Restrictions.none); */
 				child.val = postFixedOperatorEvaluator(childLeafNodes.Select(i => i.val.deciValue).ToList(), tokenString);
 			}
 			flattenTieredAddOrMult(child);
@@ -157,6 +151,7 @@ namespace PhysicsEngine.Compiler {
 					break;
 				case "*":
 					returnVal *= values[i];
+					//TODO: Combine factors into a new factors list so the result doesn't need to be factored
 					break;
 				case "/":
 					returnVal /= values[i];

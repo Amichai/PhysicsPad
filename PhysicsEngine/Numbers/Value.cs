@@ -9,6 +9,7 @@ using System.Numerics;
 namespace PhysicsEngine.Numbers {
 	public enum Restrictions { dontFactorMe, dontSetToFraction, dontFactorDontSetFraction, none };
 	public enum NumberType { integer, deci, fractional, imaginary, exponent };
+	//TODO: implement exponential form for saving and displaying factors
 	public class Value {
 		#region constructors
 		public Value(Numerics.BigRational doubleVal, Restrictions restrictions) {

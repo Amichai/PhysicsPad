@@ -17,8 +17,6 @@ namespace PhysicsEngine {
 			TokenType = tokenType;
 			if (TokenType == TokenType.number) {
 				Decimal tempValForParse = Decimal.Parse(TokenString);
-				//TODO: I don't understand the double BR construtcor. THis seems to be broken.
-				//ADd the numerator and denominator explicitly
 				TokenNumValue = new Numerics.BigRational(tempValForParse);
 				
 			}

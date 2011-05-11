@@ -36,8 +36,5 @@ namespace PhysicsEngine.Expression {
 		//Handle infinite series
 		//Sums
 		//Calc
-
-
-		//TODO: Handle factorial and build the Value class so it won't overflow
 	}
 }

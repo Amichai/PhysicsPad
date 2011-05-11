@@ -64,7 +64,6 @@ namespace PhysicsEngine.Numbers {
 			this.factorsContainer.InAList.Sort();
 		}
 		public void Factorize(BigInteger factorMe) {
-			//TODO: Run a sanity test to make sure this won't take forever
 			OrigionalNumber = factorMe;
 			for (BigInteger i = 2; i < factorMe + 1; i++) {
 				if (i > 10000000) {
@@ -78,10 +77,9 @@ namespace PhysicsEngine.Numbers {
 		}
 
 		public Factors(List<Factors> factors) {
-			//TODO: find a good list combinng algorithm and make sure this is optimal
+			//TODO: find a good list combing algorithm and make sure this is optimal
 			//throw new NotImplementedException();
 		}
-		//TODO: implement a multiplication method which will combine two lists of factors into one new list
 
 		internal string Visualize() {
 			return factorsContainer.Visualize();
