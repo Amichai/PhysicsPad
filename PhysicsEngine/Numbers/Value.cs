@@ -7,13 +7,13 @@ using MathNet.Numerics;
 using System.Numerics;
 
 namespace PhysicsEngine.Numbers {
-	public enum Restrictions { dontFactorMe, dontSetToFraction, dontFactorDontSetFraction, none };
-	public enum NumberType { integer, deci, fractional, imaginary, exponent };
+	public enum Restrictions { dontFactorMe, none };
+	public enum NumberType { integer, rational, irrational, imaginary, exponent };
 	//TODO: implement exponential form for saving and displaying factors
 	public class Value {
 		#region constructors
 		public Value(Numerics.BigRational doubleVal, Restrictions restrictions) {
-				InitDouble(doubleVal, restrictions);
+			InitDouble(doubleVal, restrictions);
 		}
 		public Value(Numerics.BigRational doubleVal, Factors factors, Restrictions restrictions) {
 			InitDouble(doubleVal, restrictions);
@@ -35,29 +35,29 @@ namespace PhysicsEngine.Numbers {
 		}
 		public Value(int numerator, int denomenator, NumberType type) {
 			switch (type) {
-				case NumberType.fractional:
+				case NumberType.rational:
 					InitFraction(numerator, denomenator);
 					break;
 			}
 		}
 		#endregion
 
-		private NumberType primaryNumType { get; set; }
+		public NumberType primaryNumType { get; set; }
+		public double rationalEvaluated;
 
 		/// <summary>Decimal value</summary>
 		public void InitDouble(Numerics.BigRational val, Restrictions restrictions) {
-			this.deciValue = val;
+			this.RationalValue = val;
+			this.primaryNumType = NumberType.rational;
 			if (val == (BigInteger)(val)) {
 				//this is done to avoid the accumulation of miniscule errors:
-				deciValue = (BigInteger)val;
+				RationalValue = (BigInteger)val;
 				primaryNumType = NumberType.integer;
-				if (restrictions != Restrictions.dontFactorMe && restrictions != Restrictions.dontFactorDontSetFraction) {
-					factors = new Factors((new List<BigInteger>(){(BigInteger)deciValue}));
+				if (restrictions != Restrictions.dontFactorMe) {
+					factors = new Factors((new List<BigInteger>(){(BigInteger)RationalValue}));
 				}
-			}else if (restrictions != Restrictions.dontSetToFraction && restrictions != Restrictions.dontFactorDontSetFraction) {
-				asAFraction = decimalToFraction(deciValue);
-			}			
-			this.primaryNumType = NumberType.deci;
+			}
+			rationalEvaluated = (double)RationalValue.Numerator / (double)RationalValue.Denominator;
 		}
 		public Factors factors;
 
@@ -65,42 +65,37 @@ namespace PhysicsEngine.Numbers {
 		public void InitComplexNum(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart) {
 			this.realPart = new Value(realPart, Restrictions.none);
 			this.imaginaryPart = new Value(imaginaryPart, Restrictions.none);
-			this.deciValue = realPart;
+			this.RationalValue = realPart;
 			this.primaryNumType = NumberType.imaginary;
 
 		}
 
 		/// <summary>Fraction</summary>
 		public void InitFraction(BigInteger numerator, BigInteger denominator) {
-			this.numerator = new Value(numerator, Restrictions.dontSetToFraction);
-			this.denominator = new Value(denominator, Restrictions.dontSetToFraction);
-			this.deciValue = ((Numerics.BigRational)numerator / denominator);
-			this.primaryNumType = NumberType.fractional;
+			RationalValue = new Numerics.BigRational(numerator, denominator);
+			this.primaryNumType = NumberType.rational;
 		}
 
 		/// <summary>Exponent</summary>
 		public void InitExp(Numerics.BigRational expBase, Numerics.BigRational expPower, Restrictions restrictionsToPass) {
 			this.ExpBase = new Value(expBase, restrictionsToPass);
 			this.ExpPower = new Value(expPower, restrictionsToPass);
-			this.deciValue = (Numerics.BigRational.Pow(expBase, (BigInteger)expPower));
+			this.RationalValue = (Numerics.BigRational.Pow(expBase, (BigInteger)expPower));
 			primaryNumType = NumberType.exponent;
 		}
 		
-		public Numerics.BigRational deciValue = double.MinValue;
+		public Numerics.BigRational RationalValue = double.MinValue;
 		
-		public Value asAFraction { get; set; }
 		public Value realPart { get; set; }
 		public Value imaginaryPart { get; set; }
-		public Value numerator{ get; set; }
-		public Value denominator{ get; set; }
 		public Value ExpBase { get; set; }
 		public Value ExpPower { get; set; }
 
 		public string GetValueToString() {
-			if (primaryNumType == NumberType.deci || primaryNumType == NumberType.integer) {
-				return deciValue.ToString();
-			} else if (primaryNumType == NumberType.fractional) {
-				return numerator.GetValueToString() + "/" + denominator.GetValueToString();
+			if (primaryNumType == NumberType.rational || primaryNumType == NumberType.integer) {
+				return RationalValue.ToString();
+			} else if (primaryNumType == NumberType.irrational) {
+				return rationalEvaluated.ToString();
 			} else if (primaryNumType == NumberType.imaginary) {
 				return realPart.GetValueToString() + " " + imaginaryPart.GetValueToString() + "i";
 			} else if (primaryNumType == NumberType.exponent) {
@@ -115,12 +110,6 @@ namespace PhysicsEngine.Numbers {
 			if(factors != null)
 				output += factors.Visualize();
 			output += "\n";
-			if (asAFraction != null) {
-				output += "As a fraction: " + asAFraction.GetValueToString();
-				output += " = " + asAFraction.deciValue.ToString();
-				output += "\n     Numerator: "+ asAFraction.numerator.FullVisualization();
-				output += "     Denomenator: " + asAFraction.denominator.FullVisualization();
-			}
 			return output;
 		}
 
@@ -141,7 +130,7 @@ namespace PhysicsEngine.Numbers {
 			if (Decimal == (BigInteger)Decimal) {
 				fractionNumerator = (int)Decimal * decimalSign;
 				fractionDenominator = 1;
-				return new Value(fractionDenominator, fractionNumerator, NumberType.fractional);
+				return new Value(fractionDenominator, fractionNumerator, NumberType.rational);
 			}
 			Z = Decimal;
 			previousDenominator = 0;
@@ -153,7 +142,7 @@ namespace PhysicsEngine.Numbers {
 				fractionNumerator = (BigInteger)(Decimal*fractionDenominator + .5);
 			} 
 			fractionNumerator  = decimalSign * fractionNumerator;
-			return new Value(fractionNumerator, fractionDenominator, NumberType.fractional);
+			return new Value(fractionNumerator, fractionDenominator, NumberType.rational);
 		}
 	}
 }

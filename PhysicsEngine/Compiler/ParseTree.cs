@@ -6,6 +6,7 @@ using PhysicsEngine.Numbers;
 using System.Diagnostics;
 using MathNet.Numerics;
 using System.Numerics;
+using PhysicsEngine.ReferenceLibraries;
 
 namespace PhysicsEngine.Compiler {
 	public abstract class ParseTree {
@@ -69,7 +70,13 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
-				child.val = postFixedOperatorEvaluator(childLeafNodes.Select(i => i.val.deciValue).ToList(), tokenString);
+				List<Numerics.BigRational> paramaters = childLeafNodes.Select(i => i.val.RationalValue).ToList();
+				if (token.TokenType == TokenType.suffixOperator || token.TokenType == TokenType.infixOperator)
+					child.val = postFixedOperatorEvaluator(paramaters, tokenString);
+				else if (token.TokenType == TokenType.function) {
+					child.val = functionEvaluator(paramaters, tokenString);
+				} else
+					throw new Exception("Not operator or function can't evaluate");
 			}
 			flattenTieredAddOrMult(child);
 			children.Insert(0, child);
@@ -114,12 +121,47 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
+		Value functionEvaluator(List<Numerics.BigRational> values, string tokenString) {
+			switch (tokenString) {
+				case "SUM":
+					return Functions.Sum(values);
+				case "SIN":
+					if (values.Count() != 1)
+						throw new Exception("Sine only takes one argument");
+					return Functions.Sin((double)values.First());
+				case "COS":
+					if (values.Count() != 1)
+						throw new Exception("Cosine only takes one argument");
+					return Functions.Cos((double)values.First());
+				case "TAN":
+					if (values.Count() != 1)
+						throw new Exception("Tangent only takes one argument");
+					return Functions.Tan((double)values.First());
+				case "ABS":
+					if (values.Count() != 1)
+						throw new Exception("Abs() only takes one argument");
+					return Functions.Abs((double)values.First());
+				case "SQRT":
+					if (values.Count() != 1)
+						throw new Exception("Sqrt() only takes one argument");
+					return Functions.Sqrt((double)values.First());
+				case "POW":
+					if (values.Count() != 2)
+						throw new Exception("Pow() only takes two arguments");
+					return Functions.Pow((double)values.First(), (double)values.Last());
+				default:
+
+
+					throw new Exception("Function not in function library");
+			}
+		}
+
 		Value postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {			
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			Factors factors;
 			Numerics.BigRational returnVal = values.Last();
-			List<BigInteger> listOfFactors = new List<BigInteger>((int)returnVal);
+			List<BigInteger> listOfFactors = new List<BigInteger>();
 			if (tokenString == "!") {
 				if (returnVal.Denominator != 1)
 					ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
@@ -172,7 +214,7 @@ namespace PhysicsEngine.Compiler {
 			if (p == "ans") {
 				TreeNode child = new TreeNode();
 				child.type = nodeType.number;
-				Numerics.BigRational tokenVal = OutputLog.returnValues.Last().deciValue;
+				Numerics.BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
 				child.val = new Value(tokenVal, Restrictions.none);
 				child.name = tokenVal.ToString();
 				child.numericalEvaluation = true;

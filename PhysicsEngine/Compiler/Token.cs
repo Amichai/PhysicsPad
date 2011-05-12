@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Numerics;
-
+using PhysicsEngine.ReferenceLibraries;
 
 namespace PhysicsEngine {
 	public class Token {
-		private static readonly HashSet<string> functionLibrary = new HashSet<string>() { "Print", "Add", "Sum", "Derivative", "Integral" };
-		private static readonly HashSet<string> variableLibrary = new HashSet<string>() { };
+		//TODO: Make a static library class to store all functions
+		//TODO: Make functions case insensitive
 		public TokenType TokenType;
 		public string TokenString;
 		public Numerics.BigRational TokenNumValue;
@@ -29,9 +29,10 @@ namespace PhysicsEngine {
 					numberOfChildren = 1;
 					break;
 				case TokenType.charString:
-					if (functionLibrary.Contains(TokenString)) {
+					if (Functions.Library.Contains(TokenString.ToUpper())) {
 						TokenType = TokenType.function;
-					} else if (variableLibrary.Contains(tokenString)) {
+						TokenString = tokenString.ToUpper();
+					} else if (Variable.Library.Contains(tokenString)) {
 						TokenType = TokenType.variable;
 						//TODO: Look up variable value in a dictionary
 					}

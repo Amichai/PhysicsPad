@@ -21,14 +21,14 @@ namespace PhysicsEngine.Numbers {
 				if (newFactor == lastFactor || newFactor == 2)
 					consecutiveFactorCounter++;
 				else {
-					AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter, NumberType.exponent, Restrictions.dontFactorDontSetFraction));
+					AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter, NumberType.exponent));
 					consecutiveFactorCounter = 0;
 				}
 				lastFactor = newFactor;
 				
 			}
 			public void Flush() {
-				AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter + 1, NumberType.exponent, Restrictions.dontFactorDontSetFraction));
+				AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter + 1, NumberType.exponent));
 				Count = InAList.Count();
 			}
 			public int Count;

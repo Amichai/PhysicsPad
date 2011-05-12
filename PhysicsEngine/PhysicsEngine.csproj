@@ -72,8 +72,10 @@
     <Compile Include="OutputLog.cs" />
     <Compile Include="Numbers\Factors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DerivationLibrary.cs" />
+    <Compile Include="ReferenceLibraries\DerivationLibrary.cs" />
     <Compile Include="Numbers\Value.cs" />
+    <Compile Include="ReferenceLibraries\FunctionLibrary.cs" />
+    <Compile Include="ReferenceLibraries\VariableLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
