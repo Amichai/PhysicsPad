@@ -136,7 +136,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		protected virtual bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
 		{
 			if (managerType == typeof(TextDocumentWeakEventManager.Changing)) {
-				// TODO: put redraw into background so that other input events can be handled before the redraw.
+				// 'TODO: put redraw into background so that other input events can be handled before the redraw.
 				// Unfortunately the "easy" approach (just use DispatcherPriority.Background) here makes the editor twice as slow because
 				// the caret position change forces an immediate redraw, and the text input then forces a background redraw.
 				// When fixing this, make sure performance on the SharpDevelop "type text in C# comment" stress test doesn't get significantly worse.
@@ -511,7 +511,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public VisualLine GetVisualLine(int documentLineNumber)
 		{
-			// TODO: EnsureVisualLines() ?
+			// 'TODO: EnsureVisualLines() ?
 			foreach (VisualLine visualLine in allVisualLines) {
 				Debug.Assert(visualLine.IsDisposed == false);
 				int start = visualLine.FirstDocumentLine.LineNumber;
@@ -1283,7 +1283,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public VisualLine GetVisualLineFromVisualTop(double visualTop)
 		{
-			// TODO: change this method to also work outside the visible range -
+			// 'TODO: change this method to also work outside the visible range -
 			// required to make GetPosition work as expected!
 			EnsureVisualLines();
 			foreach (VisualLine vl in this.VisualLines) {

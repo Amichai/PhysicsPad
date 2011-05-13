@@ -20,7 +20,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 	/// </summary>
 	sealed class HeightTree : ILineTracker, IDisposable
 	{
-		// TODO: Optimize this. This tree takes alot of memory.
+		// 'TODO: Optimize this. This tree takes alot of memory.
 		// (56 bytes for HeightTreeNode + ca. 25 bytes per node for the dictionary)
 		// We should try to get rid of the dictionary and find height nodes per index.
 		// And we might do much better by compressing lines with the same height into a single node.

@@ -24,3 +24,4 @@ C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit\obj\Debug\the
 C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.g.resources
 C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.dll
 C:\Users\Amichai\Documents\My Source\Avalon\ICSharpCode.AvalonEdit\obj\Debug\ICSharpCode.AvalonEdit.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\bin\Debug\ICSharpCode.AvalonEdit.xml

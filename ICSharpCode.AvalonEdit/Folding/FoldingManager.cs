@@ -145,7 +145,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// </summary>
 		public FoldingSection GetNextFolding(int startOffset)
 		{
-			// TODO: returns the longest folding instead of any folding at the first position after startOffset
+			// 'TODO: returns the longest folding instead of any folding at the first position after startOffset
 			return foldings.FindFirstSegmentWithStartAfter(startOffset);
 		}
 		

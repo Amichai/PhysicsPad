@@ -55,7 +55,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			get { return start; }
 			internal set { 
 				start = value;
-				// TODO: raised property changed event (but only after the operation is complete)
+				// 'TODO: raised property changed event (but only after the operation is complete)
 			}
 		}
 		
@@ -68,7 +68,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			get { return end; }
 			internal set {
 				end = value; 
-				// TODO: raised property changed event (but only after the operation is complete)
+				// 'TODO: raised property changed event (but only after the operation is complete)
 			}
 		}
 		

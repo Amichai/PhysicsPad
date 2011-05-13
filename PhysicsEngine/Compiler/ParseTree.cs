@@ -7,6 +7,7 @@ using System.Diagnostics;
 using MathNet.Numerics;
 using System.Numerics;
 using PhysicsEngine.ReferenceLibraries;
+using BigRationalNumerics;
 
 namespace PhysicsEngine.Compiler {
 	public abstract class ParseTree {
@@ -39,7 +40,7 @@ namespace PhysicsEngine.Compiler {
 	}
 
 	public class TreeNode : ParseTree{
-		internal void AppendNumber(Numerics.BigRational tokenVal) {
+		internal void AppendNumber(BigRational tokenVal) {
 			TreeNode child = new TreeNode();
 			child.type = nodeType.number;
 			child.val = new Value(tokenVal, Restrictions.none);
@@ -70,7 +71,7 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
-				List<Numerics.BigRational> paramaters = childLeafNodes.Select(i => i.val.RationalValue).ToList();
+				List<BigRational> paramaters = childLeafNodes.Select(i => i.val.RationalValue).ToList();
 				if (token.TokenType == TokenType.suffixOperator || token.TokenType == TokenType.infixOperator)
 					child.val = postFixedOperatorEvaluator(paramaters, tokenString);
 				else if (token.TokenType == TokenType.function) {
@@ -121,7 +122,7 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		Value functionEvaluator(List<Numerics.BigRational> values, string tokenString) {
+		Value functionEvaluator(List<BigRational> values, string tokenString) {
 			switch (tokenString) {
 				case "SUM":
 					return Functions.Sum(values);
@@ -156,11 +157,11 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		Value postFixedOperatorEvaluator(List<Numerics.BigRational> values, string tokenString) {			
+		Value postFixedOperatorEvaluator(List<BigRational> values, string tokenString) {			
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			Factors factors;
-			Numerics.BigRational returnVal = values.Last();
+			BigRational returnVal = values.Last();
 			List<BigInteger> listOfFactors = new List<BigInteger>();
 			if (tokenString == "!") {
 				if (returnVal.Denominator != 1)
@@ -169,7 +170,7 @@ namespace PhysicsEngine.Compiler {
 					for (int i = 2; i < returnVal + 1; i++) {
 						listOfFactors.Add(i);
 					}
-					returnVal = new Numerics.BigRational(((BigInteger)Combinatorics.Permutations((int)returnVal.Numerator)), 1);
+					returnVal = new BigRational(((BigInteger)Combinatorics.Permutations((int)returnVal.Numerator)), 1);
 					factors = new Factors(listOfFactors);
 					return new Value(returnVal, factors, Restrictions.dontFactorMe);
 				}
@@ -195,7 +196,7 @@ namespace PhysicsEngine.Compiler {
 					returnVal %= values[i];
 					break;
 				case "^":
-					returnVal = Numerics.BigRational.Pow(returnVal, (BigInteger)values[i]);
+					returnVal = BigRational.Pow(returnVal, (BigInteger)values[i]);
 					if (values.Count() > 2)
 						throw new Exception("Can't have more than two parameters for the power method.");
 					break;
@@ -214,7 +215,7 @@ namespace PhysicsEngine.Compiler {
 			if (p == "ans") {
 				TreeNode child = new TreeNode();
 				child.type = nodeType.number;
-				Numerics.BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
+				BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
 				child.val = new Value(tokenVal, Restrictions.none);
 				child.name = tokenVal.ToString();
 				child.numericalEvaluation = true;

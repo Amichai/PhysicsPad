@@ -21,51 +21,54 @@ namespace PhysicsEngine {
 		Stack<Token> operatorStack = new Stack<Token>();
 		public PostfixedTokens(List<Token> inputTokens) {
 			foreach (Token token in inputTokens) {
-				if (token.TokenType == TokenType.number || token.TokenType == TokenType.variable) {
-					tokens.Add(token);
-				}
-				if (token.TokenType == TokenType.function) {
-					operatorStack.Push(token);
-					numberOfFunctionParameters.Add(0);
-				}
-				//TODO: Make a new token type called argument seperator
-				if (token.TokenType == TokenType.argSeperator) { //","
-					if (operatorStack.Count() == 0) {
-						ErrorLog.Add(new ErrorMessage(token.TokenString + " operator syntax error."));
-					} else {
-						if(numberOfFunctionParameters.Count > 0)
+				switch (token.TokenType) {
+					case TokenType.number:
+						tokens.Add(token);
+						break;
+					case TokenType.variable:
+						tokens.Add(token);
+						break;
+					case TokenType.function:
+						operatorStack.Push(token);
+						numberOfFunctionParameters.Add(0);
+						break;
+					case TokenType.argSeperator:
+						if (operatorStack.Count() == 0) {
+							ErrorLog.Add(new ErrorMessage(token.TokenString + " operator syntax error."));
+						} else {
+							if (numberOfFunctionParameters.Count > 0)
+								numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
+							while (operatorStack.First().TokenType != TokenType.openBrace) {
+								tokens.Add(operatorStack.Pop());
+							}
+						}
+						break;
+					case TokenType.infixOperator:
+						handleOperator(token);
+						break;
+					case TokenType.suffixOperator:
+						tokens.Add(token);
+						break;
+					case TokenType.openBrace:
+						operatorStack.Push(token);
+						break;
+					case TokenType.closedBrace:
+						if(numberOfFunctionParameters.Count() > 0)
 							numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
 						while (operatorStack.First().TokenType != TokenType.openBrace) {
+							if (operatorStack.Count() == 0) {
+								ErrorLog.Add(new ErrorMessage("mismatched parenthesis error"));
+							}
 							tokens.Add(operatorStack.Pop());
 						}
-					}
-				}
-				if (token.TokenType == TokenType.infixOperator) {
-					handleOperator(token);
-				}
-				if (token.TokenType == TokenType.suffixOperator) {
-					tokens.Add(token);
-				}
-				if (token.TokenType == TokenType.openBrace) {
-					operatorStack.Push(token);
-				}
-				if (token.TokenType == TokenType.closedBrace) {
-					Debug.Print(operatorStack.First().TokenType.ToString());
-					if(numberOfFunctionParameters.Count() > 0)
-						numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
-					while (operatorStack.First().TokenType != TokenType.openBrace) {
-						if (operatorStack.Count() == 0) {
-							ErrorLog.Add(new ErrorMessage("mismatched parenthesis error"));
+						operatorStack.Pop(); //Pop the left parenthesis off the stack
+						if (operatorStack.Count > 0 && operatorStack.First().TokenType == TokenType.function) {
+							Token tokenToAdd = operatorStack.Pop();
+							tokenToAdd.numberOfChildren = numberOfFunctionParameters.Last();
+							numberOfFunctionParameters.RemoveAt(numberOfFunctionParameters.Count() - 1);
+							tokens.Add(tokenToAdd);
 						}
-						tokens.Add(operatorStack.Pop());
-					}
-					operatorStack.Pop(); //Pop the left parenthesis off the stack
-					if (operatorStack.Count > 0 && operatorStack.First().TokenType == TokenType.function) {
-						Token tokenToAdd = operatorStack.Pop();
-						tokenToAdd.numberOfChildren = numberOfFunctionParameters.Last();
-						numberOfFunctionParameters.RemoveAt(numberOfFunctionParameters.Count() - 1);
-						tokens.Add(tokenToAdd);
-					}
+						break;
 				}
 			}
 			while (operatorStack.Count() > 0) {
@@ -140,7 +143,8 @@ namespace PhysicsEngine {
 						parseTree.AppendOperator(token);
 						break;
 					default:
-						throw new Exception("This token type cannot be appended to the parse tree");
+						ErrorLog.Add(new ErrorMessage("Fatal parsing error: this token type is unknown cannot be appended to the parse tree"));
+						return null;
 				}
 			}
 			//The root node is always redundant by construction

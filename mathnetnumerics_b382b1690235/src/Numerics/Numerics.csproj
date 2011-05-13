@@ -473,7 +473,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Third Party Source\Math\BigRational\BigRationalLibrary\BigRationalLibrary.csproj">
+      <Project>{C662CA62-196F-454F-B7C0-367E0BCDCAEC}</Project>
+      <Name>BigRationalLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

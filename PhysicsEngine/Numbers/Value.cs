@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using MathNet.Numerics;
 using System.Numerics;
+using BigRationalNumerics;
 
 namespace PhysicsEngine.Numbers {
 	public enum Restrictions { dontFactorMe, none };
@@ -12,21 +13,21 @@ namespace PhysicsEngine.Numbers {
 	//TODO: implement exponential form for saving and displaying factors
 	public class Value {
 		#region constructors
-		public Value(Numerics.BigRational doubleVal, Restrictions restrictions) {
+		public Value(BigRational doubleVal, Restrictions restrictions) {
 			InitDouble(doubleVal, restrictions);
 		}
-		public Value(Numerics.BigRational doubleVal, Factors factors, Restrictions restrictions) {
+		public Value(BigRational doubleVal, Factors factors, Restrictions restrictions) {
 			InitDouble(doubleVal, restrictions);
 			this.factors = factors;
 		}
-		public Value(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart, NumberType type) {
+		public Value(BigRational realPart, BigRational imaginaryPart, NumberType type) {
 			switch (type) {
 				case NumberType.imaginary:
 					InitComplexNum(realPart, imaginaryPart);
 					break;
 			}
 		}
-		public Value(Numerics.BigRational baseVal, Numerics.BigRational exponent, NumberType type, Restrictions restrictions) {
+		public Value(BigRational baseVal, BigRational exponent, NumberType type, Restrictions restrictions) {
 			switch (type) {
 				case NumberType.exponent:
 					InitExp(baseVal, exponent, restrictions);
@@ -46,7 +47,7 @@ namespace PhysicsEngine.Numbers {
 		public double rationalEvaluated;
 
 		/// <summary>Decimal value</summary>
-		public void InitDouble(Numerics.BigRational val, Restrictions restrictions) {
+		public void InitDouble(BigRational val, Restrictions restrictions) {
 			this.RationalValue = val;
 			this.primaryNumType = NumberType.rational;
 			if (val == (BigInteger)(val)) {
@@ -62,7 +63,7 @@ namespace PhysicsEngine.Numbers {
 		public Factors factors;
 
 		/// <summary>Complex Numbers</summary>
-		public void InitComplexNum(Numerics.BigRational realPart, Numerics.BigRational imaginaryPart) {
+		public void InitComplexNum(BigRational realPart, BigRational imaginaryPart) {
 			this.realPart = new Value(realPart, Restrictions.none);
 			this.imaginaryPart = new Value(imaginaryPart, Restrictions.none);
 			this.RationalValue = realPart;
@@ -72,19 +73,19 @@ namespace PhysicsEngine.Numbers {
 
 		/// <summary>Fraction</summary>
 		public void InitFraction(BigInteger numerator, BigInteger denominator) {
-			RationalValue = new Numerics.BigRational(numerator, denominator);
+			RationalValue = new BigRational(numerator, denominator);
 			this.primaryNumType = NumberType.rational;
 		}
 
 		/// <summary>Exponent</summary>
-		public void InitExp(Numerics.BigRational expBase, Numerics.BigRational expPower, Restrictions restrictionsToPass) {
+		public void InitExp(BigRational expBase, BigRational expPower, Restrictions restrictionsToPass) {
 			this.ExpBase = new Value(expBase, restrictionsToPass);
 			this.ExpPower = new Value(expPower, restrictionsToPass);
-			this.RationalValue = (Numerics.BigRational.Pow(expBase, (BigInteger)expPower));
+			this.RationalValue = (BigRational.Pow(expBase, (BigInteger)expPower));
 			primaryNumType = NumberType.exponent;
 		}
 		
-		public Numerics.BigRational RationalValue = double.MinValue;
+		public BigRational RationalValue = double.MinValue;
 		
 		public Value realPart { get; set; }
 		public Value imaginaryPart { get; set; }
@@ -114,19 +115,19 @@ namespace PhysicsEngine.Numbers {
 		}
 
 		private enum Sign { positive, negative };
-		private Value decimalToFraction(Numerics.BigRational Decimal) {
+		private Value decimalToFraction(BigRational Decimal) {
 			BigInteger fractionNumerator = int.MaxValue;
 			BigInteger fractionDenominator = 1;
-			Numerics.BigRational accuracyFactor = .0000001;
+			BigRational accuracyFactor = .0000001;
 			int decimalSign;
-			Numerics.BigRational Z;
+			BigRational Z;
 			BigInteger previousDenominator;
 			BigInteger scratchValue;
 
 			if (Decimal < 0) {
 				decimalSign = -1;
 			} else decimalSign = 1;
-			Decimal = Numerics.BigRational.Abs(Decimal);
+			Decimal = BigRational.Abs(Decimal);
 			if (Decimal == (BigInteger)Decimal) {
 				fractionNumerator = (int)Decimal * decimalSign;
 				fractionDenominator = 1;
@@ -134,7 +135,7 @@ namespace PhysicsEngine.Numbers {
 			}
 			Z = Decimal;
 			previousDenominator = 0;
-			while (!(Z == (BigInteger)Z) && (Numerics.BigRational.Abs((Decimal - ((Numerics.BigRational)fractionNumerator / fractionDenominator))) > accuracyFactor)) {
+			while (!(Z == (BigInteger)Z) && (BigRational.Abs((Decimal - ((BigRational)fractionNumerator / fractionDenominator))) > accuracyFactor)) {
 				Z = 1/(Z - (BigInteger)Z);
 				scratchValue = fractionDenominator;
 				fractionDenominator = fractionDenominator*(BigInteger)Z + previousDenominator;

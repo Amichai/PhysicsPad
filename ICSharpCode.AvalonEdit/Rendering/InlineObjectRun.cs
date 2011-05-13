@@ -43,7 +43,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 				throw new ArgumentNullException("context");
 			
 			// remove inline object if its already added, can happen e.g. when recreating textrun for word-wrapping
-			// TODO: certainly the text view should handle this internally? external code might want to use InlineObjectRun,
+			// 'TODO: certainly the text view should handle this internally? external code might want to use InlineObjectRun,
 			// but doesn't have access to textLayer.RemoveInlineObject
 			context.TextView.textLayer.RemoveInlineObject(this.Element);
 			

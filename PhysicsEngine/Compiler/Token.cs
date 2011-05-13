@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 using PhysicsEngine.ReferenceLibraries;
+using BigRationalNumerics;
 
 namespace PhysicsEngine {
 	public class Token {
@@ -11,7 +12,7 @@ namespace PhysicsEngine {
 		//TODO: Make functions case insensitive
 		public TokenType TokenType;
 		public string TokenString;
-		public Numerics.BigRational TokenNumValue;
+		public BigRational TokenNumValue;
 		public int numberOfChildren = int.MinValue;
 
 		public Token(string tokenString, TokenType tokenType) {
@@ -20,7 +21,7 @@ namespace PhysicsEngine {
 			switch (TokenType) {
 				case TokenType.number:
 					Decimal tempValForParse = Decimal.Parse(TokenString);
-					TokenNumValue = new Numerics.BigRational(tempValForParse);
+					TokenNumValue = new BigRational(tempValForParse);
 					break;
 				case TokenType.infixOperator:
 					numberOfChildren = 2;

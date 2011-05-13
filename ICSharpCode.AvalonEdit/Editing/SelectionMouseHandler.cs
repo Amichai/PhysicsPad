@@ -60,7 +60,7 @@ namespace ICSharpCode.AvalonEdit.Editing
 		}
 		#endregion
 		
-		// TODO: allow disabling text drag'n'drop
+		// 'TODO: allow disabling text drag'n'drop
 		const bool AllowTextDragDrop = true;
 		
 		readonly TextArea textArea;

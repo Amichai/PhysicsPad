@@ -33,6 +33,7 @@ namespace MathNet.Numerics
     using System;
     using System.Numerics;
 
+	
     /// <summary>
     /// Double-precision trigonometry toolkit.
     /// </summary>

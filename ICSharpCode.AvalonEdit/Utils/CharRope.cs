@@ -104,7 +104,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 				return RopeNode<char>.emptyRopeNode;
 			}
 			RopeNode<char> node = RopeNode<char>.CreateNodes(text.Length);
-			// TODO: store data
+			// 'TODO: store data
 			return node;
 			 */
 		}

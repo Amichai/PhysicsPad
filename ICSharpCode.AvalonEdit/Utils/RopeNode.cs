@@ -430,7 +430,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 				result.length += count;
 				return result;
 			} else if (height == 0) {
-				// TODO: implement this more efficiently?
+				// 'TODO: implement this more efficiently?
 				return Insert(offset, CreateFromArray(array, arrayIndex, count));
 			} else {
 				// this is a concat node (both leafs and function nodes are handled by the case above)

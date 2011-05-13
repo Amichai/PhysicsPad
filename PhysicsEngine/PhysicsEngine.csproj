@@ -37,12 +37,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BigRationalLibrary">
-      <HintPath>..\packages\BigRationalLibrary.1.0.0.0\lib\NETFramework40\BigRationalLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics, Version=2011.4.17.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.2011.4.17.0\lib\Net40\MathNet.Numerics.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -84,6 +78,16 @@
     <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
     <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
     <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Third Party Source\Math\BigRational\BigRationalLibrary\BigRationalLibrary.csproj">
+      <Project>{C662CA62-196F-454F-B7C0-367E0BCDCAEC}</Project>
+      <Name>BigRationalLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mathnetnumerics_b382b1690235\src\Numerics\Numerics.csproj">
+      <Project>{B7CAE5F4-A23F-4438-B5BE-41226618B695}</Project>
+      <Name>Numerics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
