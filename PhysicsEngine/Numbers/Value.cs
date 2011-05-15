@@ -147,3 +147,7 @@ namespace PhysicsEngine.Numbers {
 		}
 	}
 }
+
+//TODO: Class for storing numbers in exponential notation
+//TODO: Functions to generate irrational numbers
+//TODO: Class to handle polynomials

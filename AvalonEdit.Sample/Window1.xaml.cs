@@ -148,6 +148,7 @@ namespace AvalonEdit.Sample
 		private string textOfCurrentLine = string.Empty;
 		private string output = string.Empty;
 		private PhysicsEngine.Numbers.Value lastValue;
+		//private PhysicsEngine.Numbers.Complex lastValue;
 
 		void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
 		{

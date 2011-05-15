@@ -63,6 +63,10 @@
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="Expression\Derivation.cs" />
     <Compile Include="Expression\Expression.cs" />
+    <Compile Include="Numbers\BigInt.cs" />
+    <Compile Include="Numbers\BigIrrational.cs" />
+    <Compile Include="Numbers\BigNumber.cs" />
+    <Compile Include="Numbers\Complex.cs" />
     <Compile Include="OutputLog.cs" />
     <Compile Include="Numbers\Factors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,13 +10,7 @@ namespace PhysicsEngine.ReferenceLibraries {
 	static class Functions {
 		//TODO: If the function typed doesn't exist in the library than don't evaluate anything
 		public static readonly HashSet<string> Library = new HashSet<string>() { 
-			"SUM",
-			"SIN",
-			"COS",
-			"TAN",
-			"ABS",
-			"SQRT",
-			"POW"
+			"SUM","SIN","COS","TAN","ABS","SQRT","POW","INVCOS","INVSIN","INVTAN",
 		};
 		public static Value Sum(List<BigRational> values) {
 			BigRational returnVal = 0;
@@ -45,12 +39,32 @@ namespace PhysicsEngine.ReferenceLibraries {
 			return valToReturn;
 		}
 
+		internal static Value InvSin(double value) {
+			BigRational returnVal = new BigRational(MathNet.Numerics.Trig.InverseSine(value));
+			Value valToReturn = new Value(returnVal, Restrictions.none);
+			valToReturn.primaryNumType = NumberType.irrational;
+			return valToReturn;
+		}
+		internal static Value InvCos(double value) {
+			BigRational returnVal = new BigRational(MathNet.Numerics.Trig.InverseCosine(value));
+			Value valToReturn = new Value(returnVal, Restrictions.none);
+			valToReturn.primaryNumType = NumberType.irrational;
+			return valToReturn;
+		}
+		internal static Value InvTan(double value) {
+			BigRational returnVal = new BigRational(MathNet.Numerics.Trig.InverseTangent(value));
+			Value valToReturn = new Value(returnVal, Restrictions.none);
+			valToReturn.primaryNumType = NumberType.irrational;
+			return valToReturn;
+		}
+
 		internal static Value Abs(double value) {
 			BigRational returnVal = new BigRational(Math.Abs(value));
 			return new Value(returnVal, Restrictions.none);
 		}
 
 		internal static Value Sqrt(double value) {
+			//TODO: The return value of this function and the pow value needs to be complex
 			System.Numerics.Complex complexVal = new System.Numerics.Complex(value, 0);
 			BigRational returnVal = new BigRational(MathNet.Numerics.ComplexExtensions.SquareRoot(complexVal).Real);
 			Value valToReturn = new Value(returnVal, Restrictions.none);
@@ -66,5 +80,6 @@ namespace PhysicsEngine.ReferenceLibraries {
 			valToReturn.primaryNumType = NumberType.irrational;
 			return valToReturn;
 		}
+
 	}
 }

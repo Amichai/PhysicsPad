@@ -138,6 +138,18 @@ namespace PhysicsEngine.Compiler {
 					if (values.Count() != 1)
 						throw new Exception("Tangent only takes one argument");
 					return Functions.Tan((double)values.First());
+				case "INVSIN":
+					if (values.Count() != 1)
+						throw new Exception("InvSine only takes one argument");
+					return Functions.InvSin((double)values.First());
+				case "INVCOS":
+					if (values.Count() != 1)
+						throw new Exception("InvCosine only takes one argument");
+					return Functions.InvCos((double)values.First());
+				case "INVTAN":
+					if (values.Count() != 1)
+						throw new Exception("InvTangent only takes one argument");
+					return Functions.InvTan((double)values.First());	
 				case "ABS":
 					if (values.Count() != 1)
 						throw new Exception("Abs() only takes one argument");
@@ -211,22 +223,29 @@ namespace PhysicsEngine.Compiler {
 			return new Value(returnVal, Restrictions.none);
 		}
 
-		internal bool AppendVariable(string p) {
-			if (p == "ans") {
-				TreeNode child = new TreeNode();
-				child.type = nodeType.number;
-				BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
-				child.val = new Value(tokenVal, Restrictions.none);
-				child.name = tokenVal.ToString();
-				child.numericalEvaluation = true;
-				children.Insert(0, child);
-				//clear the static visualization output string:
-				output = string.Empty;
-				return true;
-			} else {
-				ErrorLog.Add(new ErrorMessage("Unknown variable can't be appendend"));
-				return false;
+		internal bool AppendVariable(string variableName) {
+			TreeNode child = new TreeNode();
+			child.type = nodeType.number;
+			switch (variableName) {
+				case "ANS":
+					BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
+					child.val = new Value(tokenVal, Restrictions.none);
+					child.name = tokenVal.ToString();
+					break;
+				case "PI":
+					child.val = Variable.PI;
+					child.name = child.val.ToString();
+					break;
+				default:
+					ErrorLog.Add(new ErrorMessage("Unknown variable can't be appendend"));
+					return false;
 			}
+			
+			child.numericalEvaluation = true;
+			children.Insert(0, child);
+			//clear the static visualization output string:
+			output = string.Empty;
+			return true;
 		}
 	}
 	//TODO: ParseTreeManipulationMethods

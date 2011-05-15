@@ -135,7 +135,7 @@ namespace PhysicsEngine {
 						parseTree.AppendOperator(token);
 						break;
 					case TokenType.variable:
-						if (!parseTree.AppendVariable(token.TokenString)) {
+						if (!parseTree.AppendVariable(token.TokenString.ToUpper())) {
 							return null;
 						}
 						break;

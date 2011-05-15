@@ -20,7 +20,7 @@ namespace PhysicsEngine {
 			TokenType = tokenType;
 			switch (TokenType) {
 				case TokenType.number:
-					Decimal tempValForParse = Decimal.Parse(TokenString);
+					double tempValForParse = double.Parse(TokenString);
 					TokenNumValue = new BigRational(tempValForParse);
 					break;
 				case TokenType.infixOperator:
@@ -33,9 +33,8 @@ namespace PhysicsEngine {
 					if (Functions.Library.Contains(TokenString.ToUpper())) {
 						TokenType = TokenType.function;
 						TokenString = tokenString.ToUpper();
-					} else if (Variable.Library.Contains(tokenString)) {
+					} else if (Variable.Library.Contains(tokenString.ToUpper())) {
 						TokenType = TokenType.variable;
-						//TODO: Look up variable value in a dictionary
 					}
 					break;
 			}

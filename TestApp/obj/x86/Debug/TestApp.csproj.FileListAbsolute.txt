@@ -1,0 +1,12 @@
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\TestApp.exe
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\TestApp.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\BigRationalLibrary.dll
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\MathNet.Numerics.dll
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\zlib.net.dll
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\BigRationalLibrary.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\MathNet.Numerics.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\bin\Debug\PhysicsEngine.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\obj\x86\Debug\TestApp.exe
+C:\Users\Amichai\Documents\My Source\Avalon\TestApp\obj\x86\Debug\TestApp.pdb
