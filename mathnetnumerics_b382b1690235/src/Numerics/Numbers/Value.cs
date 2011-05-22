@@ -7,7 +7,7 @@ using MathNet.Numerics;
 using System.Numerics;
 using BigRationalNumerics;
 
-namespace PhysicsEngine.Numbers {
+namespace MathNet.Numerics {
 	public enum Restrictions { dontFactorMe, none };
 	public enum NumberType { integer, rational, irrational, imaginary, exponent };
 	//TODO: implement exponential form for saving and displaying factors

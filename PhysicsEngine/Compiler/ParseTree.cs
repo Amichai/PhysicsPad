@@ -15,7 +15,7 @@ namespace PhysicsEngine.Compiler {
 		public bool numericalEvaluation;
 		public List<TreeNode> children = new List<TreeNode>();
 		public string name = string.Empty;
-		public Value val;
+		public Complex val;
 		public nodeType type;
 		internal static string output = "\n";
 
@@ -28,7 +28,7 @@ namespace PhysicsEngine.Compiler {
 				output += "| ";
 				indent += "| ";
 			}
-			output += name + ": " + val.GetValueToString() + "\n";
+			output += name + ": " + val.FullVisualization() + "\n";
 
 			int i = 0;
 			foreach (TreeNode c in children) {
@@ -40,10 +40,10 @@ namespace PhysicsEngine.Compiler {
 	}
 
 	public class TreeNode : ParseTree{
-		internal void AppendNumber(BigRational tokenVal) {
+		internal void AppendNumber(Complex tokenVal) {
 			TreeNode child = new TreeNode();
 			child.type = nodeType.number;
-			child.val = new Value(tokenVal, Restrictions.none);
+			child.val = tokenVal;
 			child.name = tokenVal.ToString();
 			child.numericalEvaluation = true;
 			children.Insert(0, child);
@@ -71,7 +71,7 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
-				List<BigRational> paramaters = childLeafNodes.Select(i => i.val.RationalValue).ToList();
+				List<Complex> paramaters = childLeafNodes.Select(i => i.val).ToList();
 				if (token.TokenType == TokenType.suffixOperator || token.TokenType == TokenType.infixOperator)
 					child.val = postFixedOperatorEvaluator(paramaters, tokenString);
 				else if (token.TokenType == TokenType.function) {
@@ -122,72 +122,65 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		Value functionEvaluator(List<BigRational> values, string tokenString) {
+		Complex functionEvaluator(List<Complex> values, string tokenString) {
 			switch (tokenString) {
 				case "SUM":
 					return Functions.Sum(values);
 				case "SIN":
 					if (values.Count() != 1)
 						throw new Exception("Sine only takes one argument");
-					return Functions.Sin((double)values.First());
+					return Functions.Sin(values.First());
 				case "COS":
 					if (values.Count() != 1)
 						throw new Exception("Cosine only takes one argument");
-					return Functions.Cos((double)values.First());
+					return Functions.Cos(values.First());
 				case "TAN":
 					if (values.Count() != 1)
 						throw new Exception("Tangent only takes one argument");
-					return Functions.Tan((double)values.First());
+					return Functions.Tan(values.First());
 				case "INVSIN":
 					if (values.Count() != 1)
 						throw new Exception("InvSine only takes one argument");
-					return Functions.InvSin((double)values.First());
+					return Functions.InvSin(values.First());
 				case "INVCOS":
 					if (values.Count() != 1)
 						throw new Exception("InvCosine only takes one argument");
-					return Functions.InvCos((double)values.First());
+					return Functions.InvCos(values.First());
 				case "INVTAN":
 					if (values.Count() != 1)
 						throw new Exception("InvTangent only takes one argument");
-					return Functions.InvTan((double)values.First());	
+					return Functions.InvTan(values.First());	
 				case "ABS":
 					if (values.Count() != 1)
 						throw new Exception("Abs() only takes one argument");
-					return Functions.Abs((double)values.First());
+					return Functions.Abs(values.First());
 				case "SQRT":
 					if (values.Count() != 1)
 						throw new Exception("Sqrt() only takes one argument");
-					return Functions.Sqrt((double)values.First());
+					return Functions.Sqrt(values.First());
 				case "POW":
 					if (values.Count() != 2)
 						throw new Exception("Pow() only takes two arguments");
-					return Functions.Pow((double)values.First(), (double)values.Last());
+					return Functions.Pow(values.First(), values.Last());
 				default:
-
-
 					throw new Exception("Function not in function library");
 			}
 		}
 
-		Value postFixedOperatorEvaluator(List<BigRational> values, string tokenString) {			
+		Complex postFixedOperatorEvaluator(List<Complex> values, string tokenString) {			
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			Factors factors;
-			BigRational returnVal = values.Last();
-			List<BigInteger> listOfFactors = new List<BigInteger>();
+			Complex returnVal = values.Last();
+			List<int> listOfFactors = new List<int>();
 			if (tokenString == "!") {
-				if (returnVal.Denominator != 1)
-					ErrorLog.Add(new ErrorMessage("Rounded because cannot take the factorial of a non integer"));
-				else {
-					for (int i = 2; i < returnVal + 1; i++) {
-						listOfFactors.Add(i);
-					}
-					returnVal = new BigRational(((BigInteger)Combinatorics.Permutations((int)returnVal.Numerator)), 1);
-					factors = new Factors(listOfFactors);
-					return new Value(returnVal, factors, Restrictions.dontFactorMe);
-				}
 				if (values.Count() > 1)
 					throw new Exception("suffix notation can only have one child");
+				for (int i = 2; i < returnVal.Real + 1; i++) {
+					listOfFactors.Add(i);
+				}
+				factors = new Factors(listOfFactors);
+				return returnVal.Factorial();
 			}
 			for (int i = values.Count() - 2; i >= 0; i--) 
 				switch (tokenString) {
@@ -205,12 +198,12 @@ namespace PhysicsEngine.Compiler {
 					returnVal /= values[i];
 					break;
 				case "%":
-					returnVal %= values[i];
+					returnVal = returnVal.Modulus(values[i]);
 					break;
 				case "^":
-					returnVal = BigRational.Pow(returnVal, (BigInteger)values[i]);
 					if (values.Count() > 2)
 						throw new Exception("Can't have more than two parameters for the power method.");
+					returnVal = MathNet.Numerics.ComplexExtensions.Power(returnVal, values[i]);
 					break;
 				case "Sum":
 					returnVal += values[i];
@@ -220,7 +213,7 @@ namespace PhysicsEngine.Compiler {
 			}
 			if (returnVal == int.MinValue)
 				throw new Exception("No evaluation happened");
-			return new Value(returnVal, Restrictions.none);
+			return returnVal;
 		}
 
 		internal bool AppendVariable(string variableName) {
@@ -228,8 +221,8 @@ namespace PhysicsEngine.Compiler {
 			child.type = nodeType.number;
 			switch (variableName) {
 				case "ANS":
-					BigRational tokenVal = OutputLog.returnValues.Last().RationalValue;
-					child.val = new Value(tokenVal, Restrictions.none);
+					Complex tokenVal = OutputLog.returnValues.Last();
+					child.val = tokenVal;
 					child.name = tokenVal.ToString();
 					break;
 				case "PI":

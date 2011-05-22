@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 
-namespace PhysicsEngine.Numbers {
+namespace MathNet.Numerics {
 	/// <summary>Takes a number in the constructor and builds a list of prime factors.</summary>
 	public class Factors {
 		/// <summary>
@@ -12,26 +12,28 @@ namespace PhysicsEngine.Numbers {
 		/// Helps concatinate lists for multiplication.
 		/// </summary>
 		public class Container {
-			private int lastFactor = int.MinValue;
+			private BigInteger lastFactor = int.MinValue;
 			private int consecutiveFactorCounter = 0;
-			public void Add(int newFactor) {
+			public void Add(BigInteger newFactor) {
 				InAList.Add(newFactor);
 				if(InAList.Count > 0 && InAList.Last() > newFactor)
 					throw new Exception("Your list is out of order!");
 				if (newFactor == lastFactor || newFactor == 2)
 					consecutiveFactorCounter++;
 				else {
+					AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter, NumberType.exponent));
 					consecutiveFactorCounter = 0;
 				}
 				lastFactor = newFactor;
 				
 			}
 			public void Flush() {
+				AsExponents.Add(new Value((double)lastFactor, (double)consecutiveFactorCounter + 1, NumberType.exponent));
 				Count = InAList.Count();
 			}
 			public int Count;
 			public List<BigInteger> InAList = new List<BigInteger>();
-			public List<BaseAndPower> AsExponents = new List<BaseAndPower>();
+			public List<Value> AsExponents = new List<Value>();
 
 			public string Visualize(){
 				string output = string.Empty;
@@ -55,15 +57,15 @@ namespace PhysicsEngine.Numbers {
 
 		public BigInteger OrigionalNumber;
 		public Container factorsContainer = new Container();
-		public Factors(List<int> factors) {
-			foreach (int value in factors) {
+		public Factors(List<BigInteger> factors) {
+			foreach (BigInteger value in factors) {
 				Factorize(value);
 			}
 			this.factorsContainer.InAList.Sort();
 		}
-		public void Factorize(int factorMe) {
+		public void Factorize(BigInteger factorMe) {
 			OrigionalNumber = factorMe;
-			for (int i = 2; i < factorMe + 1; i++) {
+			for (BigInteger i = 2; i < factorMe + 1; i++) {
 				if (i > 10000000) {
 					i = factorMe;
 				}

@@ -5,9 +5,16 @@ using System.Text;
 using System.Numerics;
 using System.Diagnostics;
 
-namespace PhysicsEngine.Numbers {
+namespace MathNet.Numerics {
 	public class BigIrrational {
+		enum Sign{ positive, negative}
+		Sign sign;
 		public BigIrrational(double val) {
+			if (val >= 0)
+				sign = Sign.positive;
+			else 
+				sign = Sign.negative;
+			val = Math.Abs(val);
 			string numString = val.ToString();
 			Debug.Print(numString);
 			int numberOfDecimalPlaces = numString.Count();
@@ -23,5 +30,17 @@ namespace PhysicsEngine.Numbers {
 		}
 		public int DecimalLocation;
 		public BigInteger NumericalContent;
+		public void FlipSign() {
+			if(NumericalContent != 0){
+				if (sign == Sign.negative)
+					sign = Sign.positive;
+				else
+					sign = Sign.negative;
+			}
+		}
+
+		internal double GetVal() {
+			return (double)NumericalContent / (double)DecimalLocation;
+		}
 	}
 }

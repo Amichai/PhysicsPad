@@ -11,7 +11,7 @@ namespace PhysicsEngine.Expression {
 	public class Expression {
 		public string Input = string.Empty;
 		public Tokens Tokens;
-		public Value ReturnValue;
+		public System.Numerics.Complex ReturnValue;
 		public ParseTree ParseTree = new TreeNode();
 		public PostfixedTokens PostFixedTokens;
 		public string Output = string.Empty;

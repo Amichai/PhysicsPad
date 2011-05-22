@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 
-namespace PhysicsEngine.Numbers {
+namespace MathNet.Numerics {
 	public class BigInt {
 		public BigInt(int value) {
 			Val = new BigInteger(value);

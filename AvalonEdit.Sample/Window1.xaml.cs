@@ -31,6 +31,7 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using Microsoft.Win32;
 using System.Diagnostics;
 using PhysicsEngine;
+using System.Numerics;
 
 namespace AvalonEdit.Sample
 {
@@ -147,8 +148,7 @@ namespace AvalonEdit.Sample
 		private PhysicsEngine.Expression.Expression localExpression;
 		private string textOfCurrentLine = string.Empty;
 		private string output = string.Empty;
-		private PhysicsEngine.Numbers.Value lastValue;
-		//private PhysicsEngine.Numbers.Complex lastValue;
+		private Complex lastValue;
 
 		void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
 		{
@@ -157,7 +157,7 @@ namespace AvalonEdit.Sample
 				textOfCurrentLine = textOfCurrentLine.Trim();
 				localExpression = new PhysicsEngine.Expression.Expression(textOfCurrentLine);
 				if (localExpression != null) {
-					output = localExpression.Output;
+					output = localExpression.Output + "\n";
 					lastValue = localExpression.ReturnValue;
 				}
 			}

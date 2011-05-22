@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PhysicsEngine.Numbers;
+using System.Numerics;
 
 namespace PhysicsEngine {
 	public static class OutputLog {
-		public static void Add(Value val) {
+		public static void Add(Complex val) {
 			returnValues.Add(val);
 		}
-		public static List<Value> returnValues = new List<Value>();
+		public static List<Complex> returnValues = new List<Complex>();
 	}
 
 	public static class ErrorLog {

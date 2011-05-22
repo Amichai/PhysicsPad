@@ -12,7 +12,7 @@ namespace PhysicsEngine {
 		//TODO: Make functions case insensitive
 		public TokenType TokenType;
 		public string TokenString;
-		public BigRational TokenNumValue;
+		public Complex TokenNumValue;
 		public int numberOfChildren = int.MinValue;
 
 		public Token(string tokenString, TokenType tokenType) {
@@ -20,8 +20,7 @@ namespace PhysicsEngine {
 			TokenType = tokenType;
 			switch (TokenType) {
 				case TokenType.number:
-					double tempValForParse = double.Parse(TokenString);
-					TokenNumValue = new BigRational(tempValForParse);
+					TokenNumValue = double.Parse(TokenString);
 					break;
 				case TokenType.infixOperator:
 					numberOfChildren = 2;
