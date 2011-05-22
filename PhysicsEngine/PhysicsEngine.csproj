@@ -64,7 +64,7 @@
     <Compile Include="Expression\Derivation.cs" />
     <Compile Include="Expression\Expression.cs" />
     <Compile Include="Numbers\BaseAndPower.cs" />
-    <Compile Include="Numbers\Complex.cs" />
+    <Compile Include="Numbers\ComplexExtensions.cs" />
     <Compile Include="OutputLog.cs" />
     <Compile Include="Numbers\Factors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

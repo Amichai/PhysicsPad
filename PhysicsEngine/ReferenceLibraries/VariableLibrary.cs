@@ -9,6 +9,6 @@ namespace PhysicsEngine.ReferenceLibraries {
 	static class Variable{
 		public static readonly HashSet<string> Library = new HashSet<string>() { 
 			"ANS", "PI" };
-		public static Complex PI = new Complex(Math.PI, double.MinValue);
+		public static Complex PI = new Complex(Math.PI, 0);
 	}
 }

@@ -39,7 +39,6 @@ namespace PhysicsEngine.ReferenceLibraries {
 		internal static Complex InvTan(Complex value) {
 			return MathNet.Numerics.Trig.InverseTangent(value);
 		}
-
 		internal static Complex Abs(Complex value) {
 			return Complex.Abs(value);
 		}

@@ -31,6 +31,13 @@ namespace PhysicsEngine {
 				if (tokenToAdd.TokenType == TokenType.number && tokens.Last().TokenType == TokenType.closedBrace && tokenToAdd.TokenString[0] != '-') {
 					tokens.Add(new Token("*", TokenType.infixOperator));
 				}
+				//Infer a multiplication sign beteen a number and a variable
+				if (tokenToAdd.TokenType == TokenType.variable && tokens.Last().TokenType == TokenType.number) {
+					tokens.Add(new Token("*", TokenType.infixOperator));
+				}
+				if (tokenToAdd.TokenType == TokenType.number && tokens.Last().TokenType == TokenType.variable) {
+					tokens.Add(new Token("*", TokenType.infixOperator));
+				}
 			}
 		}
 
