@@ -1,0 +1,5 @@
+C:\Users\Amichai\Documents\My Source\Avalon\SystemLogging\bin\Debug\SystemLogging.dll
+C:\Users\Amichai\Documents\My Source\Avalon\SystemLogging\bin\Debug\SystemLogging.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\SystemLogging\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\SystemLogging\obj\Debug\SystemLogging.dll
+C:\Users\Amichai\Documents\My Source\Avalon\SystemLogging\obj\Debug\SystemLogging.pdb

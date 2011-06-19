@@ -32,6 +32,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using PhysicsEngine;
 using System.Numerics;
+using SystemLogging;
 
 namespace AvalonEdit.Sample
 {
@@ -140,26 +141,19 @@ namespace AvalonEdit.Sample
 			
 			if (e.Text == "\n") {
 				int offset = textEditor.Document.GetOffset(textEditor.TextArea.Caret.Line, 1);
-				textEditor.Document.Insert(offset, output);
-				if(lastValue != null)
-					OutputLog.Add(lastValue);
+				textEditor.Document.Insert(offset, state.Output);
+				if (state.LastValue != null)
+					OutputLog.AddToLog(state.LastValue);
 			}
 		}
-		private PhysicsEngine.Expression.Expression localExpression;
-		private string textOfCurrentLine = string.Empty;
-		private string output = string.Empty;
-		private Complex lastValue;
+
+		CurrentState state = new CurrentState();
 
 		void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
 		{
 			if (e.Text == "\n") {
-				textOfCurrentLine = textEditor.Document.GetText(textEditor.Document.GetOffset(textEditor.TextArea.Caret.Line, 1), textEditor.Document.Lines[textEditor.TextArea.Caret.Line - 1].Length).ToString();
-				textOfCurrentLine = textOfCurrentLine.Trim();
-				localExpression = new PhysicsEngine.Expression.Expression(textOfCurrentLine);
-				if (localExpression != null) {
-					output = localExpression.Output + "\n";
-					lastValue = localExpression.ReturnValue;
-				}
+				string currentLine = textEditor.Document.GetText(textEditor.Document.GetOffset(textEditor.TextArea.Caret.Line, 1), textEditor.Document.Lines[textEditor.TextArea.Caret.Line - 1].Length).ToString();
+				state.ComputeLine(currentLine.Trim());
 			}
 			if (e.Text.Length > 0 && completionWindow != null) {
 				if (!char.IsLetterOrDigit(e.Text[0])) {

@@ -1,0 +1,12 @@
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\Compiler.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\Compiler.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\obj\Debug\Compiler.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\obj\Debug\Compiler.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\MathNet.Numerics.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\PhysicsEngine.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\SystemLogging.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\zlib.net.dll
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\MathNet.Numerics.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\SystemLogging.pdb
+C:\Users\Amichai\Documents\My Source\Avalon\Compiler\bin\Debug\PhysicsEngine.pdb

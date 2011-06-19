@@ -55,22 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compiler\ParseTree.cs" />
-    <Compile Include="Compiler\Tokens.cs" />
-    <Compile Include="Compiler\PostFixedTokens.cs" />
-    <Compile Include="Compiler\Token.cs" />
-    <Compile Include="Compiler\Tokenizer.cs" />
-    <Compile Include="ErrorMessage.cs" />
-    <Compile Include="Expression\Derivation.cs" />
-    <Compile Include="Expression\Expression.cs" />
     <Compile Include="Numbers\BaseAndPower.cs" />
-    <Compile Include="Numbers\ComplexExtensions.cs" />
-    <Compile Include="OutputLog.cs" />
     <Compile Include="Numbers\Factors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceLibraries\DerivationLibrary.cs" />
-    <Compile Include="ReferenceLibraries\FunctionLibrary.cs" />
-    <Compile Include="ReferenceLibraries\VariableLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

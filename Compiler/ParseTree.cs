@@ -6,10 +6,9 @@ using PhysicsEngine.Numbers;
 using System.Diagnostics;
 using MathNet.Numerics;
 using System.Numerics;
-using PhysicsEngine.ReferenceLibraries;
-using BigRationalNumerics;
+using SystemLogging;
 
-namespace PhysicsEngine.Compiler {
+namespace Compiler {
 	public abstract class ParseTree {
 		public enum nodeType { number, function, operation, variable }
 		public bool numericalEvaluation;
@@ -63,7 +62,7 @@ namespace PhysicsEngine.Compiler {
 			child.name = tokenString;
 			TreeNode[] childLeafNodes = new TreeNode[numberOfChildLeafs];
 			for (int i = 0; i < numberOfChildLeafs; i++) {
-				if (children.Count() == 0)
+				if (children.Count() == 0) 
 					throw new Exception("Post fixed token notation error.");
 				childLeafNodes[i] = children[0];
 				children.RemoveAt(0);
@@ -75,7 +74,8 @@ namespace PhysicsEngine.Compiler {
 				if (token.TokenType == TokenType.suffixOperator || token.TokenType == TokenType.infixOperator)
 					child.val = postFixedOperatorEvaluator(paramaters, tokenString);
 				else if (token.TokenType == TokenType.function) {
-					child.val = functionEvaluator(paramaters, tokenString);
+					//TODO: You should be evaluating parse trees not Complex values
+					child.val = token.Function.Compute(paramaters);
 				} else
 					throw new Exception("Not operator or function can't evaluate");
 			}
@@ -122,52 +122,7 @@ namespace PhysicsEngine.Compiler {
 			}
 		}
 
-		Complex functionEvaluator(List<Complex> values, string tokenString) {
-			switch (tokenString) {
-				case "SUM":
-					return Functions.Sum(values);
-				case "SIN":
-					if (values.Count() != 1)
-						throw new Exception("Sine only takes one argument");
-					return Functions.Sin(values.First());
-				case "COS":
-					if (values.Count() != 1)
-						throw new Exception("Cosine only takes one argument");
-					return Functions.Cos(values.First());
-				case "TAN":
-					if (values.Count() != 1)
-						throw new Exception("Tangent only takes one argument");
-					return Functions.Tan(values.First());
-				case "INVSIN":
-					if (values.Count() != 1)
-						throw new Exception("InvSine only takes one argument");
-					return Functions.InvSin(values.First());
-				case "INVCOS":
-					if (values.Count() != 1)
-						throw new Exception("InvCosine only takes one argument");
-					return Functions.InvCos(values.First());
-				case "INVTAN":
-					if (values.Count() != 1)
-						throw new Exception("InvTangent only takes one argument");
-					return Functions.InvTan(values.First());	
-				case "ABS":
-					if (values.Count() != 1)
-						throw new Exception("Abs() only takes one argument");
-					return Functions.Abs(values.First());
-				case "SQRT":
-					if (values.Count() != 1)
-						throw new Exception("Sqrt() only takes one argument");
-					return Functions.Sqrt(values.First());
-				case "POW":
-					if (values.Count() != 2)
-						throw new Exception("Pow() only takes two arguments");
-					return Functions.Pow(values.First(), values.Last());
-				default:
-					throw new Exception("Function not in function library");
-			}
-		}
-
-		Complex postFixedOperatorEvaluator(List<Complex> values, string tokenString) {			
+		private Complex postFixedOperatorEvaluator(List<Complex> values, string tokenString) {			
 			//TODO: Solve these problems in cases that cannot be evaluated numerically.
 			//Possibly extend the Value type for non-numerical evaluation.
 			Factors factors;
@@ -221,12 +176,12 @@ namespace PhysicsEngine.Compiler {
 			child.type = nodeType.number;
 			switch (variableName) {
 				case "ANS":
-					Complex tokenVal = OutputLog.returnValues.Last();
+					Complex tokenVal = (Complex)OutputLog.returnValues.Last();
 					child.val = tokenVal;
 					child.name = tokenVal.ToString();
 					break;
 				case "PI":
-					child.val = Variable.PI;
+					child.val = PI.value;
 					child.name = child.val.ToString();
 					break;
 				default:

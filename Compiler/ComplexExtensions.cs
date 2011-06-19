@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 using MathNet.Numerics;
+using SystemLogging;
 
-namespace PhysicsEngine.Numbers {
-	public static class ComplexExtensions {
-		public static string FullVisualization(this Complex num){
+namespace Compiler {
+	static public class ComplexExtensions {
+		public static string FullVisualization(this Complex num) {
 			string output = string.Empty;
 			output += num.Real.ToString();
-			if (!num.IsReal()) {
-				output += " +i" + num.Imaginary.ToString(); 
+			if(!num.IsReal()) {
+				output += " +i" + num.Imaginary.ToString();
 			}
-			return output;	
+			return output;
 		}
 		public static Complex Factorial(this Complex num) {
 			if (!num.IsReal())
 				ErrorLog.Add(new ErrorMessage("Imaginary part ignored"));
-			if(Math.Floor(num.Real) != num.Real)
+			if (Math.Floor(num.Real) != num.Real)
 				ErrorLog.Add(new ErrorMessage("Rounded to the nearest integer"));
 			return new Complex(MathNet.Numerics.Combinatorics.Permutations((int)num.Real), 0);
 		}

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PhysicsEngine.Compiler;
 using System.Diagnostics;
+using SystemLogging;
 
-namespace PhysicsEngine {
+namespace Compiler {
 	public class PostfixedTokens : Tokens{
 		private void handleOperator(Token token) {
 			//If the current op has higher precedence, add to the stack
 			//true if the last operator on the stack has precedence over the current operator
 			while (operatorStack.Count() > 0 && operatorStack.First().TokenType == TokenType.infixOperator
 				&& precedenceTest(operatorStack.First().TokenString, token.TokenString)) {
-				tokens.Add(operatorStack.Pop());
+					InAList.Add(operatorStack.Pop());
 			}
 			operatorStack.Push(token);
 		}
@@ -23,10 +23,10 @@ namespace PhysicsEngine {
 			foreach (Token token in inputTokens) {
 				switch (token.TokenType) {
 					case TokenType.number:
-						tokens.Add(token);
+						InAList.Add(token);
 						break;
 					case TokenType.variable:
-						tokens.Add(token);
+						InAList.Add(token);
 						break;
 					case TokenType.function:
 						operatorStack.Push(token);
@@ -39,7 +39,7 @@ namespace PhysicsEngine {
 							if (numberOfFunctionParameters.Count > 0)
 								numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
 							while (operatorStack.First().TokenType != TokenType.openBrace) {
-								tokens.Add(operatorStack.Pop());
+								InAList.Add(operatorStack.Pop());
 							}
 						}
 						break;
@@ -47,7 +47,7 @@ namespace PhysicsEngine {
 						handleOperator(token);
 						break;
 					case TokenType.suffixOperator:
-						tokens.Add(token);
+						InAList.Add(token);
 						break;
 					case TokenType.openBrace:
 						operatorStack.Push(token);
@@ -59,20 +59,29 @@ namespace PhysicsEngine {
 							if (operatorStack.Count() == 0) {
 								ErrorLog.Add(new ErrorMessage("mismatched parenthesis error"));
 							}
-							tokens.Add(operatorStack.Pop());
+							InAList.Add(operatorStack.Pop());
 						}
 						operatorStack.Pop(); //Pop the left parenthesis off the stack
 						if (operatorStack.Count > 0 && operatorStack.First().TokenType == TokenType.function) {
 							Token tokenToAdd = operatorStack.Pop();
 							tokenToAdd.numberOfChildren = numberOfFunctionParameters.Last();
 							numberOfFunctionParameters.RemoveAt(numberOfFunctionParameters.Count() - 1);
-							tokens.Add(tokenToAdd);
+							InAList.Add(tokenToAdd);
 						}
+						break;
+					case TokenType.timeUnit:
+						InAList.Add(token);
+						break;
+					case TokenType.volumeUnit:
+						InAList.Add(token);
+						break;
+					case TokenType.weightUnit:
+						InAList.Add(token);
 						break;
 				}
 			}
 			while (operatorStack.Count() > 0) {
-				tokens.Add(operatorStack.Pop());
+				InAList.Add(operatorStack.Pop());
 			}
 			//TODO: Handle mismatched bracket exception
 		}
@@ -118,12 +127,12 @@ namespace PhysicsEngine {
 		}
 
 		public override void Add(Token token) {
-			tokens.Add(token);
+			InAList.Add(token);
 		}
 		
 		public TreeNode BuildParseTree() {
 			TreeNode parseTree = new TreeNode();
-			foreach (Token token in tokens) {
+			foreach (Token token in InAList) {
 				switch (token.TokenType) {
 					case TokenType.number:
 						parseTree.AppendNumber(token.TokenNumValue);
@@ -142,13 +151,26 @@ namespace PhysicsEngine {
 					case TokenType.function:
 						parseTree.AppendOperator(token);
 						break;
+					case TokenType.massUnit:
+						parseTree.AppendNumber(token.TokenNumValue);
+						break;
+					case TokenType.volumeUnit:
+						break;
+					case TokenType.weightUnit:
+						break;
+					case TokenType.speedUnit:
+						break;
+					case TokenType.timeUnit:
+						break;
 					default:
 						ErrorLog.Add(new ErrorMessage("Fatal parsing error: this token type is unknown cannot be appended to the parse tree"));
 						return null;
 				}
 			}
-			//The root node is always redundant by construction
-			return parseTree.children.First();						
+			if (parseTree.children.Count() > 0)
+				//The root node is always redundant by construction
+				return parseTree.children.First();
+			else return null;
 		}
 	}
 }

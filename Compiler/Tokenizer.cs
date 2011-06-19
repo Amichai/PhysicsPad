@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using SystemLogging;
 
-namespace PhysicsEngine {
-	public enum TokenType { number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator }
+namespace Compiler {
+	public enum TokenType { number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator,
+							massUnit, volumeUnit, timeUnit, weightUnit, speedUnit, ForceUnit }
 	public enum CharType { number, letter, infixArithmeticOp, comma, period, plusOrMinusSign, brace, whitespace, suffixOp }
 	class Tokenizer {
 		public readonly static HashSet<char> argumentSeperator = new HashSet<char>() { ',' };
@@ -61,6 +63,8 @@ namespace PhysicsEngine {
 				return tokenToReturn;
 			}
 
+			private bool decimalNumber = false;
+
 			public Token AddChar(currentChar c) {
 				Token tokenToReturn  = null;
 				//check if the char is legal in this context
@@ -108,8 +112,20 @@ namespace PhysicsEngine {
 						//We're not dealing with a word - we're dealing with a number or +/-
 						if (currentStringTokenType != TokenType.charString) {
 							currentStringTokenType = TokenType.number;
-							charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.number, CharType.letter, CharType.period };
+							charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.number, CharType.period };
 							syntaxIllegalCharTypes = new HashSet<CharType>() { };
+						} else {
+							currentStringTokenType = TokenType.charString;
+							charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.letter, CharType.number };
+							syntaxIllegalCharTypes = new HashSet<CharType>() { };
+						}
+						break;
+					case CharType.period:
+						if (currentStringTokenType != TokenType.charString && decimalNumber == false) {
+							currentStringTokenType = TokenType.number;
+							charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.number };
+							syntaxIllegalCharTypes = new HashSet<CharType>() { CharType.period  };
+							decimalNumber = true;
 						} else {
 							currentStringTokenType = TokenType.charString;
 							charsThatAppendToCurrentString = new HashSet<CharType>() { CharType.letter, CharType.number };

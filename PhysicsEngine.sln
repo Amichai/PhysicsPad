@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numerics", "mathnetnumerics
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigRationalLibrary", "..\..\Third Party Source\Math\BigRational\BigRationalLibrary\BigRationalLibrary.csproj", "{C662CA62-196F-454F-B7C0-367E0BCDCAEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compiler", "Compiler\Compiler.csproj", "{2969C63F-538F-4E40-A96B-C2A946D01DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLogging", "SystemLogging\SystemLogging.csproj", "{533AD38E-EB4B-4E48-8767-F4159ABA9011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,26 @@ Global
 		{C662CA62-196F-454F-B7C0-367E0BCDCAEC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C662CA62-196F-454F-B7C0-367E0BCDCAEC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C662CA62-196F-454F-B7C0-367E0BCDCAEC}.Release|x86.ActiveCfg = Release|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2969C63F-538F-4E40-A96B-C2A946D01DEE}.Release|x86.ActiveCfg = Release|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{533AD38E-EB4B-4E48-8767-F4159ABA9011}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

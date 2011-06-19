@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PhysicsEngine.Numbers;
-using System.Numerics;
 
-namespace PhysicsEngine {
+namespace SystemLogging {
 	public static class OutputLog {
-		public static void Add(Complex val) {
+		public static void AddToLog(object val) {
 			returnValues.Add(val);
 		}
-		public static List<Complex> returnValues = new List<Complex>();
+		public static List<object> returnValues = new List<object>();
 	}
 
 	public static class ErrorLog {

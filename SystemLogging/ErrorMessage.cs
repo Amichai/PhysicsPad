@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PhysicsEngine {
+namespace SystemLogging {
 	public class ErrorMessage {
 		string message = string.Empty;
 		public ErrorMessage(string message) {
