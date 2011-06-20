@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using SystemLogging;
+using System.Numerics;
 
 namespace Compiler {
 	public enum TokenType { number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator,
@@ -57,16 +58,36 @@ namespace Compiler {
 			private HashSet<CharType> syntaxIllegalCharTypes = new HashSet<CharType>();
 			private HashSet<CharType> charsThatAppendToCurrentString = new HashSet<CharType>();
 
-			public Token Flush() {
-				Token tokenToReturn = null;
-				tokenToReturn = new Token(tokenString, currentStringTokenType);
+			public IToken PublishCurrentTokenString() {
+				IToken tokenToReturn = null ;
+				switch (currentStringTokenType) {
+				case TokenType.number:
+					tokenToReturn = new NumberToken(new Complex(double.Parse(tokenString), 0));
+					break;
+				case TokenType.infixOperator:
+					tokenToReturn = new OperatorToken(tokenString, TokenType.infixOperator);
+					break;
+				case TokenType.suffixOperator:
+					tokenToReturn = new OperatorToken(tokenString, TokenType.suffixOperator);
+					break;
+				case TokenType.charString:
+					tokenString = tokenString.ToUpper();
+					if (Functions.Library.Contains(tokenString)) {
+						tokenToReturn = new FunctionToken(tokenString);		
+					} else if (VariableToken.VariableLibrary.Contains(tokenString)) {
+						tokenToReturn = new VariableToken(tokenString);
+					} else if(UnitToken.Units.Contains(tokenString)){
+						tokenToReturn = new UnitToken(tokenString);
+					}
+					break;
+				}
 				return tokenToReturn;
 			}
 
 			private bool decimalNumber = false;
 
-			public Token AddChar(currentChar c) {
-				Token tokenToReturn  = null;
+			public IToken AddChar(currentChar c) {
+				IToken tokenToReturn  = null;
 				//check if the char is legal in this context
 				if (syntaxIllegalCharTypes.Contains(c.currentCharTokenType)) {
 					ErrorLog.Add(new ErrorMessage("Syntax illegal char cannot be added to token"));
@@ -74,7 +95,7 @@ namespace Compiler {
 				}
 				//The char is legal. Check we if we should publish the current string
 				if (!charsThatAppendToCurrentString.Contains(c.currentCharTokenType) && tokenString.Count() > 0) {
-					tokenToReturn = new Token(tokenString, currentStringTokenType);
+					tokenToReturn = PublishCurrentTokenString();
 					tokenString = string.Empty;
 				}
 				//Append Char
@@ -153,19 +174,19 @@ namespace Compiler {
 
 		currentCharString tokenString = new currentCharString();
 		public Tokens Scan() {
-			Token tokenToAdd;
+			IToken tokenToAdd;
 			for(int i = 0; i < compilerInput.Count(); i++){
 				char c = compilerInput[i];
-				tokenToAdd = tokenString.AddChar(new currentChar(c));
+				tokenToAdd = (IToken)tokenString.AddChar(new currentChar(c));
 				if (tokenToAdd != null) {
-					if (tokenToAdd.TokenType == TokenType.infixOperator && i == 1)
-						allTokens.Add(new Token("ans", TokenType.variable));
+					if (tokenToAdd.Type == TokenType.infixOperator && i == 1)
+						allTokens.Add(new VariableToken("ans"));
 					allTokens.Add(tokenToAdd);
 				}
 			}
 			//This publishes any content left over at the end of token creation
 			if (tokenString.tokenString.Count() > 0) {
-				tokenToAdd = tokenString.Flush();
+				tokenToAdd = tokenString.PublishCurrentTokenString();
 				if(tokenToAdd != null)
 					allTokens.Add(tokenToAdd);
 			} else {

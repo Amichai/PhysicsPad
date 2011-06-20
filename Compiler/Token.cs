@@ -8,99 +8,133 @@ using Compiler.Libraries;
 namespace Compiler {
 	//TODO: Make an IToken interface and different classes for different types of tokens
 	public interface IToken {
-	
+		string TokenString { get; set; }
+		TokenType Type { get; set; }
 	}
 
-	public class NumberToken : IToken { }
-	public class FunctionToken : IToken { }
-	public class VariableToken : IToken {
-	}
-	public class StringToken : IToken { }
-	public class OperatorToken : IToken { }
-	public class ArgSeperatorToken : IToken { }
-	public class BraceToken : IToken { }
-	public class EqualSignToken : IToken { }
-	public class UnitToken : IToken { }
-
-	public class Token {
-		public static readonly HashSet<string> VariableLibrary = new HashSet<string>() { "ANS", "PI" };
-		//TODO: Make a static library class to store all functions
-		//TODO: Make functions case insensitive
-		public TokenType TokenType;
-		public string TokenString;
+	public class NumberToken : IToken {
+		public string TokenString { get; set; }
 		public Complex TokenNumValue;
+		public NumberToken(Complex val) {
+			this.TokenString = val.ToString();
+			this.TokenNumValue = val;
+		}
+		public TokenType Type { get; set; }
+	}
+	public class FunctionToken : IToken {
+		public string TokenString { get; set; }
 		public int numberOfChildren = int.MinValue;
 		public IFunction Function;
-		public IVariable Variable;
-
-		public Token(string tokenString, TokenType tokenType) {
-			TokenString = tokenString;
-			TokenType = tokenType;
-			switch (TokenType) {
-				case TokenType.number:
-					TokenNumValue = double.Parse(TokenString);
+		public TokenType Type { get; set; }
+		public FunctionToken(string tokenString) {
+			this.TokenString = tokenString;
+			switch (tokenString) {
+				case "SUM":
+					Function = new Sum();
 					break;
-				case TokenType.infixOperator:
-					numberOfChildren = 2;
+				case "SIN":
+					Function = new Sin();
 					break;
-				case TokenType.suffixOperator:
-					numberOfChildren = 1;
+				case "COS":
+					Function = new Cos();
 					break;
-				case TokenType.charString:
-					TokenString = tokenString.ToUpper();
-					if (Functions.Library.Contains(TokenString)) {
-						TokenType = TokenType.function;
-						#region Functions
-						switch (TokenString) {
-							case "SUM":
-							Function = new Sum();
-							break;
-							case "SIN":
-							Function = new Sin();
-							break;
-							case "COS":
-							Function = new Cos();
-							break;
-							case "TAN":
-							Function = new Tan();
-							break;
-							case "INVSIN":
-							Function = new InvSin();
-							break;
-							case "INVCOS":
-							Function = new InvCos();
-							break;
-							case "INVTAN":
-							Function = new InvTan();
-							break;
-							case "ABS":
-							Function = new Abs();
-							break;
-							case "SQRT":
-							Function = new Sqrt();
-							break;
-							case "POW":
-							Function = new Pow();
-							break;
-							case "CONVERT":
-							Function = new Convert();
-							break;
-						}
-						#endregion
-					} else if (VariableLibrary.Contains(tokenString)) {
-						TokenType = TokenType.variable;
-						switch (tokenString) {
-							case "PI":
-								Variable = new PI();
-								break;
-						}
-					} else if(Units.MassUnits.Contains(tokenString.ToLower())){
-						TokenType = TokenType.massUnit;
-					} else if (Units.VolumeUnits.Contains(tokenString.ToLower())) {
-						TokenType = TokenType.volumeUnit;
-					}
+				case "TAN":
+					Function = new Tan();
+					break;
+				case "INVSIN":
+					Function = new InvSin();
+					break;
+				case "INVCOS":
+					Function = new InvCos();
+					break;
+				case "INVTAN":
+					Function = new InvTan();
+					break;
+				case "ABS":
+					Function = new Abs();
+					break;
+				case "SQRT":
+					Function = new Sqrt();
+					break;
+				case "POW":
+					Function = new Pow();
+					break;
+				case "CONVERT":
+					Function = new Convert();
 					break;
 			}
+		}
+	}
+	public class VariableToken : IToken {
+		public TokenType Type {get; set;}
+		public string TokenString { get; set; }
+		public static readonly HashSet<string> VariableLibrary = new HashSet<string>() { "ANS", "PI" };
+		public IVariable Variable;
+		public VariableToken(string tokenString) {
+			switch (tokenString) {
+				case "PI":
+					Variable = new PI();
+					break;
+			}
+			this.TokenString = tokenString;
+		}
+	}
+	public class StringToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+	}
+	public class OperatorToken : IToken {
+		public OperatorToken(string tokenString, TokenType tokenType) {
+			this.TokenString = tokenString;
+			this.Type = tokenType;
+		}
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+	}
+	public class ArgSeperatorToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+	}
+	public class BraceToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+	}
+	public class EqualSignToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+	}
+	public class UnitToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }
+		public static HashSet<string> Units = new HashSet<string>() { "AMU", "GRAM", "KILOGRAM", "PICOGRAM", "MILIGRAM", "TON", 
+																		"LITER", "GALLON", "CUP", "MILILITER", "NANOLITER" };
+		public IUnit unit;
+		public UnitToken(string tokenString) {
+			switch (tokenString) {
+				case "AMU":
+					break;
+				case "GRAM":
+					break;
+				case "KILOGRAM":
+					break;
+				case "PICOGRAM":
+					break;
+				case "MILIGRAM":
+					break;
+				case "TON":
+					break;
+				case "LITER":
+					break;
+				case "GALLON":
+					break;
+				case "CUP":
+					break;
+				case "MILILITER":
+					break;
+				case "NANOLITER":
+					break;
+			}
+			this.TokenString = tokenString;
 		}
 	}
 }

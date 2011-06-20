@@ -46,7 +46,7 @@
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Libraries\FunctionLibrary.cs" />
-    <Compile Include="Libraries\Units.cs" />
+    <Compile Include="Libraries\Unit.cs" />
     <Compile Include="ParseTree.cs" />
     <Compile Include="PostFixedTokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

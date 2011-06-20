@@ -7,10 +7,10 @@ using SystemLogging;
 
 namespace Compiler {
 	public class PostfixedTokens : Tokens{
-		private void handleOperator(Token token) {
+		private void handleOperator(IToken token) {
 			//If the current op has higher precedence, add to the stack
 			//true if the last operator on the stack has precedence over the current operator
-			while (operatorStack.Count() > 0 && operatorStack.First().TokenType == TokenType.infixOperator
+			while (operatorStack.Count() > 0 && operatorStack.First().Type == TokenType.infixOperator
 				&& precedenceTest(operatorStack.First().TokenString, token.TokenString)) {
 					InAList.Add(operatorStack.Pop());
 			}
@@ -18,10 +18,10 @@ namespace Compiler {
 		}
 
 		List<int> numberOfFunctionParameters = new List<int>();
-		Stack<Token> operatorStack = new Stack<Token>();
-		public PostfixedTokens(List<Token> inputTokens) {
-			foreach (Token token in inputTokens) {
-				switch (token.TokenType) {
+		Stack<IToken> operatorStack = new Stack<IToken>();
+		public PostfixedTokens(List<IToken> inputTokens) {
+			foreach (IToken token in inputTokens) {
+				switch (token.Type) {
 					case TokenType.number:
 						InAList.Add(token);
 						break;
@@ -38,7 +38,7 @@ namespace Compiler {
 						} else {
 							if (numberOfFunctionParameters.Count > 0)
 								numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
-							while (operatorStack.First().TokenType != TokenType.openBrace) {
+							while (operatorStack.First().Type != TokenType.openBrace) {
 								InAList.Add(operatorStack.Pop());
 							}
 						}
@@ -55,15 +55,15 @@ namespace Compiler {
 					case TokenType.closedBrace:
 						if(numberOfFunctionParameters.Count() > 0)
 							numberOfFunctionParameters[numberOfFunctionParameters.Count - 1] = numberOfFunctionParameters.Last() + 1;
-						while (operatorStack.First().TokenType != TokenType.openBrace) {
+						while (operatorStack.First().Type != TokenType.openBrace) {
 							if (operatorStack.Count() == 0) {
 								ErrorLog.Add(new ErrorMessage("mismatched parenthesis error"));
 							}
 							InAList.Add(operatorStack.Pop());
 						}
 						operatorStack.Pop(); //Pop the left parenthesis off the stack
-						if (operatorStack.Count > 0 && operatorStack.First().TokenType == TokenType.function) {
-							Token tokenToAdd = operatorStack.Pop();
+						if (operatorStack.Count > 0 && operatorStack.First().Type == TokenType.function) {
+							FunctionToken tokenToAdd = (FunctionToken)operatorStack.Pop();
 							tokenToAdd.numberOfChildren = numberOfFunctionParameters.Last();
 							numberOfFunctionParameters.RemoveAt(numberOfFunctionParameters.Count() - 1);
 							InAList.Add(tokenToAdd);
@@ -126,22 +126,22 @@ namespace Compiler {
 			throw new Exception("Unhandled");
 		}
 
-		public override void Add(Token token) {
+		public override void Add(IToken token) {
 			InAList.Add(token);
 		}
 		
 		public TreeNode BuildParseTree() {
 			TreeNode parseTree = new TreeNode();
-			foreach (Token token in InAList) {
-				switch (token.TokenType) {
+			foreach (IToken token in InAList) {
+				switch (token.Type) {
 					case TokenType.number:
-						parseTree.AppendNumber(token.TokenNumValue);
+						parseTree.AppendNumber((NumberToken)token);
 						break;
 					case TokenType.infixOperator:
-						parseTree.AppendOperator(token);
+						parseTree.AppendFunction(token);
 						break;
 					case TokenType.suffixOperator:
-						parseTree.AppendOperator(token);
+						parseTree.AppendFunction(token);
 						break;
 					case TokenType.variable:
 						if (!parseTree.AppendVariable(token.TokenString.ToUpper())) {
@@ -149,10 +149,10 @@ namespace Compiler {
 						}
 						break;
 					case TokenType.function:
-						parseTree.AppendOperator(token);
+						parseTree.AppendFunction((FunctionToken)token);
 						break;
 					case TokenType.massUnit:
-						parseTree.AppendNumber(token.TokenNumValue);
+						parseTree.AppendNumber((NumberToken)token);
 						break;
 					case TokenType.volumeUnit:
 						break;

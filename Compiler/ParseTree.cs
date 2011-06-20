@@ -39,7 +39,8 @@ namespace Compiler {
 	}
 
 	public class TreeNode : ParseTree{
-		internal void AppendNumber(Complex tokenVal) {
+		internal void AppendNumber(NumberToken token) {
+			Complex tokenVal = token.TokenNumValue;
 			TreeNode child = new TreeNode();
 			child.type = nodeType.number;
 			child.val = tokenVal;
@@ -49,14 +50,28 @@ namespace Compiler {
 			//clear the static visualization output string:
 			output = string.Empty;
 		}
-
+		
 		/// <summary>
 		/// Take each token string from the list of postfixedtokens and build a parse tree
 		/// with each node evaluated when possible. 
 		/// </summary>
-		internal void AppendOperator(Token token) {
+		internal void AppendFunction(IToken token) {
+			int numberOfChildLeafs =0;
+			FunctionToken functToken= null;
+			switch (token.Type) {
+				case TokenType.function:
+					functToken = (FunctionToken)token;
+					numberOfChildLeafs = functToken.numberOfChildren;
+					break;
+				case TokenType.infixOperator:
+					numberOfChildLeafs = 2;
+					break;
+				case TokenType.suffixOperator:
+					numberOfChildLeafs = 1;
+					break;
+			}
+
 			string tokenString = token.TokenString;
-			int numberOfChildLeafs = token.numberOfChildren;
 			TreeNode child = new TreeNode();
 			child.type = nodeType.operation;
 			child.name = tokenString;
@@ -71,11 +86,11 @@ namespace Compiler {
 			if (childLeafNodes.All(i => i.numericalEvaluation)) {
 				child.numericalEvaluation = true;
 				List<Complex> paramaters = childLeafNodes.Select(i => i.val).ToList();
-				if (token.TokenType == TokenType.suffixOperator || token.TokenType == TokenType.infixOperator)
+				if (token.Type == TokenType.suffixOperator || token.Type == TokenType.infixOperator)
 					child.val = postFixedOperatorEvaluator(paramaters, tokenString);
-				else if (token.TokenType == TokenType.function) {
+				else if (token.Type == TokenType.function) {
 					//TODO: You should be evaluating parse trees not Complex values
-					child.val = token.Function.Compute(paramaters);
+					child.val = functToken.Function.Compute(paramaters);
 				} else
 					throw new Exception("Not operator or function can't evaluate");
 			}
