@@ -7,19 +7,6 @@ using MathNet.Numerics;
 using System.Numerics;
 
 namespace Compiler {
-	public static class Functions {
-		//TODO: If the function typed doesn't exist in the library than don't evaluate anything
-		public static readonly HashSet<string> Library = new HashSet<string>() { 
-			"SUM","SIN","COS","TAN","ABS","SQRT","POW","INVCOS","INVSIN","INVTAN","CONVERT"
-		};
-		public static Complex Sum(List<Complex> values) {
-			Complex returnVal = 0;
-			foreach (Complex val in values) {
-				returnVal += val;
-			}
-			return returnVal;
-		}
-	}
 	public interface IFunction {
 		Complex Compute(List<Complex> values);
 	}

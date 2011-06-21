@@ -7,8 +7,10 @@ using SystemLogging;
 using System.Numerics;
 
 namespace Compiler {
-	public enum TokenType { number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator,
-							massUnit, volumeUnit, timeUnit, weightUnit, speedUnit, ForceUnit }
+	public enum TokenType {
+		number, function, charString, infixOperator, argSeperator, empty, closedBrace, openBrace, equalSign, variable, suffixOperator,
+		keyword,
+	}
 	public enum CharType { number, letter, infixArithmeticOp, comma, period, plusOrMinusSign, brace, whitespace, suffixOp }
 	class Tokenizer {
 		public readonly static HashSet<char> argumentSeperator = new HashSet<char>() { ',' };
@@ -62,7 +64,7 @@ namespace Compiler {
 				IToken tokenToReturn = null ;
 				switch (currentStringTokenType) {
 				case TokenType.number:
-					tokenToReturn = new NumberToken(new Complex(double.Parse(tokenString), 0));
+					tokenToReturn = new NumberToken(tokenString);
 					break;
 				case TokenType.infixOperator:
 					tokenToReturn = new OperatorToken(tokenString, TokenType.infixOperator);
@@ -72,12 +74,14 @@ namespace Compiler {
 					break;
 				case TokenType.charString:
 					tokenString = tokenString.ToUpper();
-					if (Functions.Library.Contains(tokenString)) {
+					if (FunctionToken.Library.Contains(tokenString)) {
 						tokenToReturn = new FunctionToken(tokenString);		
 					} else if (VariableToken.VariableLibrary.Contains(tokenString)) {
 						tokenToReturn = new VariableToken(tokenString);
 					} else if(UnitToken.Units.Contains(tokenString)){
 						tokenToReturn = new UnitToken(tokenString);
+					} else if (KeywordToken.Keywords.Contains(tokenString)) {
+						tokenToReturn = new KeywordToken(tokenString);
 					}
 					break;
 				}
@@ -180,7 +184,7 @@ namespace Compiler {
 				tokenToAdd = (IToken)tokenString.AddChar(new currentChar(c));
 				if (tokenToAdd != null) {
 					if (tokenToAdd.Type == TokenType.infixOperator && i == 1)
-						allTokens.Add(new VariableToken("ans"));
+						allTokens.Add(new KeywordToken("ANS"));
 					allTokens.Add(tokenToAdd);
 				}
 			}

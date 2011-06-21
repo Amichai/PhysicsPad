@@ -70,7 +70,8 @@ namespace Compiler {
 					numberOfChildLeafs = 1;
 					break;
 			}
-
+			//TODO: In the parser you must keep count of the amount of children and pass that number here
+			//also have restrictions in certain cases
 			string tokenString = token.TokenString;
 			TreeNode child = new TreeNode();
 			child.type = nodeType.operation;
@@ -186,15 +187,30 @@ namespace Compiler {
 			return returnVal;
 		}
 
-		internal bool AppendVariable(string variableName) {
+		internal bool AppendKeyword(string keyword) {
 			TreeNode child = new TreeNode();
 			child.type = nodeType.number;
-			switch (variableName) {
+			switch (keyword) {
 				case "ANS":
 					Complex tokenVal = (Complex)OutputLog.returnValues.Last();
 					child.val = tokenVal;
 					child.name = tokenVal.ToString();
 					break;
+				default:
+					ErrorLog.Add(new ErrorMessage("Unknown variable can't be appendend"));
+					return false;
+			}
+			child.numericalEvaluation = true;
+			children.Insert(0, child);
+			//clear the static visualization output string:
+			output = string.Empty;
+			return true;
+		}
+
+		internal bool AppendVariable(string variableName) {
+			TreeNode child = new TreeNode();
+			child.type = nodeType.number;
+			switch (variableName) {
 				case "PI":
 					child.val = PI.value;
 					child.name = child.val.ToString();

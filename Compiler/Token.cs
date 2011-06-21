@@ -15,6 +15,10 @@ namespace Compiler {
 	public class NumberToken : IToken {
 		public string TokenString { get; set; }
 		public Complex TokenNumValue;
+		public NumberToken(string val) {
+			this.TokenString = val;
+			this.TokenNumValue = new Complex(double.Parse(val),0); 
+		}
 		public NumberToken(Complex val) {
 			this.TokenString = val.ToString();
 			this.TokenNumValue = val;
@@ -22,12 +26,16 @@ namespace Compiler {
 		public TokenType Type { get; set; }
 	}
 	public class FunctionToken : IToken {
+		public static readonly HashSet<string> Library = new HashSet<string>() { 
+			"SUM","SIN","COS","TAN","ABS","SQRT","POW","INVCOS","INVSIN","INVTAN","CONVERT"
+		};
 		public string TokenString { get; set; }
 		public int numberOfChildren = int.MinValue;
 		public IFunction Function;
 		public TokenType Type { get; set; }
 		public FunctionToken(string tokenString) {
 			this.TokenString = tokenString;
+			this.Type = TokenType.function;
 			switch (tokenString) {
 				case "SUM":
 					Function = new Sum();
@@ -68,7 +76,7 @@ namespace Compiler {
 	public class VariableToken : IToken {
 		public TokenType Type {get; set;}
 		public string TokenString { get; set; }
-		public static readonly HashSet<string> VariableLibrary = new HashSet<string>() { "ANS", "PI" };
+		public static readonly HashSet<string> VariableLibrary = new HashSet<string>() { "PI" };
 		public IVariable Variable;
 		public VariableToken(string tokenString) {
 			switch (tokenString) {
@@ -135,6 +143,21 @@ namespace Compiler {
 					break;
 			}
 			this.TokenString = tokenString;
+		}
+	}
+	public class KeywordToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }		
+		public IToken Token;
+		public static HashSet<string> Keywords = new HashSet<string>() { "ANS" };
+		public KeywordToken(string tokenString) {
+			this.TokenString = tokenString;
+			switch (tokenString) {
+				case "ANS":
+					Type = TokenType.keyword;
+					Token = new NumberToken(SystemLog.LastNumber());
+					break;
+			}
 		}
 	}
 }

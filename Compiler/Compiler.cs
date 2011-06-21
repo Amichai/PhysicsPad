@@ -8,7 +8,7 @@ namespace Compiler {
 	public class Compiler {
 		public CompilerOutput EvaluateString(string input) {
 			Tokens tokens = new Tokenizer(input).Scan();
-			//TODO: fix the 3+3 bug ("+" isn't evaluating and is being read as a prefix to a number)
+			//TODO: Get the "ans" variable working again
 			System.Numerics.Complex returnValue = 0;
 			PostfixedTokens postFixedTokens = null;
 			ParseTree parseTree = null;
@@ -20,6 +20,7 @@ namespace Compiler {
 				parseTree = postFixedTokens.BuildParseTree();
 				if (parseTree != null) {
 					returnValue = parseTree.val;
+					SystemLog.AddToReturnValues(returnValue);
 					output = returnValue.FullVisualization();
 				}
 			}

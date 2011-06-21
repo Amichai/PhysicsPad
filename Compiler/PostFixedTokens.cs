@@ -22,6 +22,9 @@ namespace Compiler {
 		public PostfixedTokens(List<IToken> inputTokens) {
 			foreach (IToken token in inputTokens) {
 				switch (token.Type) {
+					case TokenType.keyword:
+						InAList.Add(token);
+						break;
 					case TokenType.number:
 						InAList.Add(token);
 						break;
@@ -69,15 +72,8 @@ namespace Compiler {
 							InAList.Add(tokenToAdd);
 						}
 						break;
-					case TokenType.timeUnit:
-						InAList.Add(token);
-						break;
-					case TokenType.volumeUnit:
-						InAList.Add(token);
-						break;
-					case TokenType.weightUnit:
-						InAList.Add(token);
-						break;
+					default:
+						throw new Exception("Unknown token type");
 				}
 			}
 			while (operatorStack.Count() > 0) {
@@ -134,6 +130,10 @@ namespace Compiler {
 			TreeNode parseTree = new TreeNode();
 			foreach (IToken token in InAList) {
 				switch (token.Type) {
+					case TokenType.keyword:
+						if (!parseTree.AppendKeyword(token.TokenString))
+							return null;
+						break;
 					case TokenType.number:
 						parseTree.AppendNumber((NumberToken)token);
 						break;
@@ -150,17 +150,6 @@ namespace Compiler {
 						break;
 					case TokenType.function:
 						parseTree.AppendFunction((FunctionToken)token);
-						break;
-					case TokenType.massUnit:
-						parseTree.AppendNumber((NumberToken)token);
-						break;
-					case TokenType.volumeUnit:
-						break;
-					case TokenType.weightUnit:
-						break;
-					case TokenType.speedUnit:
-						break;
-					case TokenType.timeUnit:
 						break;
 					default:
 						ErrorLog.Add(new ErrorMessage("Fatal parsing error: this token type is unknown cannot be appended to the parse tree"));
