@@ -84,6 +84,15 @@ namespace Compiler {
 						tokenToReturn = new KeywordToken(tokenString);
 					}
 					break;
+					case TokenType.openBrace:
+					tokenToReturn = new SyntaxToken(tokenString, TokenType.openBrace);
+					break;
+					case TokenType.closedBrace:
+					tokenToReturn = new SyntaxToken(tokenString, TokenType.closedBrace);
+					break;
+					case TokenType.argSeperator:
+					tokenToReturn = new SyntaxToken(tokenString, TokenType.argSeperator);
+					break;
 				}
 				return tokenToReturn;
 			}

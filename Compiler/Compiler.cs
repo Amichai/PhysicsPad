@@ -8,7 +8,6 @@ namespace Compiler {
 	public class Compiler {
 		public CompilerOutput EvaluateString(string input) {
 			Tokens tokens = new Tokenizer(input).Scan();
-			//TODO: Get the "ans" variable working again
 			System.Numerics.Complex returnValue = 0;
 			PostfixedTokens postFixedTokens = null;
 			ParseTree parseTree = null;

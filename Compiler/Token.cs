@@ -160,4 +160,13 @@ namespace Compiler {
 			}
 		}
 	}
+	public class SyntaxToken : IToken {
+		public string TokenString { get; set; }
+		public TokenType Type { get; set; }		
+		public SyntaxToken(string tokenString, TokenType type) {
+			this.TokenString = tokenString;
+			this.Type = type;
+		}
+
+	}
 }
